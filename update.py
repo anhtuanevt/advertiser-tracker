@@ -374,6 +374,15 @@ tr.row-changed:hover{background:#fff3cd!important}
 .modal-stat .num{font-size:22px;font-weight:700;color:#0f3460}
 .modal-stat .lbl{font-size:11px;color:#888}
 .url-cell-wrap{display:inline-flex;align-items:center;gap:2px}
+.proj-timeline{display:flex;flex-direction:column;gap:4px;padding:4px 0}
+.proj-ev{display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 0}
+.proj-ev-date{color:#888;min-width:130px;font-weight:600;white-space:nowrap}
+.proj-ev-icon{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.ev-add .proj-ev-icon{background:#d4edda;color:#155724}
+.ev-remove .proj-ev-icon{background:#f8d7da;color:#721c24}
+.ev-change .proj-ev-icon{background:#fff3cd;color:#856404}
+.proj-ev-text{color:#333}
+.modal-table tr[onclick]:hover{background:#eef2f6!important;cursor:pointer}
 .top-bar{display:flex;align-items:center;gap:16px;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap}
 .top-bar .stats{margin-bottom:0}
 .top-bar .controls{margin-bottom:0}
@@ -455,25 +464,38 @@ const s=new Set(recs.map(r=>r.domain)).size;
 let html='';
 html+=`<div class="modal-stats"><div class="modal-stat"><div class="num">${recs.length}</div><div class="lbl">Dự án</div></div><div class="modal-stat"><div class="num">${running}</div><div class="lbl">Đang chạy</div></div><div class="modal-stat"><div class="num">${stopped}</div><div class="lbl">Ngưng</div></div><div class="modal-stat"><div class="num">${s}</div><div class="lbl">Domain</div></div></div>`;
 if(adUrl)html+=`<div style="margin-bottom:20px"><a href="${escapeHtml(adUrl)}" target="_blank" class="modal-ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads Transparency</a></div>`;
-html+=`<div class="modal-section"><h3>Danh sách dự án hiện tại</h3><table class="modal-table"><thead><tr><th>Domain</th><th>URL</th><th>Trạng thái</th><th></th></tr></thead><tbody>`;
-recs.forEach(r=>{const b=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
-html+=`<tr><td style="font-weight:600;color:#0f3460">${escapeHtml(r.domain)}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank">${escapeHtml(r.url_normalized)}</a></td><td>${b}</td><td><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized)}',this)" title="Copy URL"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></td></tr>`});
+html+=`<div class="modal-section"><h3>Danh sách dự án &amp; lịch sử từng dự án</h3><table class="modal-table"><thead><tr><th>Domain</th><th>URL</th><th>Trạng thái</th><th></th></tr></thead><tbody>`;
+recs.forEach((r,idx)=>{const b=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
+const projHist=hist.filter(ev=>ev.domain===r.domain);
+html+=`<tr id="proj-${idx}" style="cursor:pointer" onclick="toggleProjHistory(${idx})"><td style="font-weight:600;color:#0f3460">${escapeHtml(r.domain)}${projHist.length>1?' <span style="font-size:10px;color:#1a73e8">('+projHist.length+' events)</span>':''}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank" onclick="event.stopPropagation()">${escapeHtml(r.url_normalized)}</a></td><td>${b}</td><td><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized)}',this);event.stopPropagation()" title="Copy URL"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></td></tr>`;
+if(projHist.length>=1){
+const sorted=[...projHist].reverse();
+html+=`<tr id="projhist-${idx}" style="display:none;background:#f7f9fc"><td colspan="4" style="padding:8px 12px 8px 32px">`;
+html+=`<div class="proj-timeline">`;
+sorted.forEach(ev=>{
+let ic='',cls='';
+if(ev.action==='added'){ic='+';cls='ev-add'}
+else if(ev.action==='removed'){ic='×';cls='ev-remove'}
+else if(ev.action==='status_change'){ic='→';cls='ev-change'}
+html+=`<div class="proj-ev ${cls}"><span class="proj-ev-date">${escapeHtml(ev.date)}</span><span class="proj-ev-icon">${ic}</span><span class="proj-ev-text">${ev.action==='added'?'Thêm mới':ev.action==='removed'?'Đã xóa':escapeHtml(ev.old_status||'')+' → '+escapeHtml(ev.status||'')}</span></div>`});
+html+=`</div></td></tr>`}});
 html+=`</tbody></table></div>`;
 if(hist.length>1){
-const sorted=[...hist].reverse();
-html+=`<div class="modal-section"><h3>Lịch sử thay đổi</h3>`;
-sorted.forEach(ev=>{
+const sortedAll=[...hist].reverse();
+html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3>`;
+sortedAll.forEach(ev=>{
 let badge='',txt='';
 if(ev.action==='added'){badge='<span class="badge new">Thêm</span>';txt=`Thêm dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}
 else if(ev.action==='removed'){badge='<span class="badge removed">Xóa</span>';txt=`Xóa dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}
 else if(ev.action==='status_change'){badge='<span class="badge changed">Đổi</span>';txt=`<span class="timeline-domain">${escapeHtml(ev.domain)}</span>: ${escapeHtml(ev.old_status||'')} → ${escapeHtml(ev.status||'')}`}
 html+=`<div class="timeline-item"><div class="timeline-date">${escapeHtml(ev.date)}</div><div class="timeline-action">${badge}${txt}</div></div>`});
 html+=`</div>`}
-else if(hist.length<=1){html+=`<div class="modal-section"><h3>Lịch sử thay đổi</h3><p style="color:#999;font-size:13px">Chưa có lịch sử thay đổi. Cập nhật data vài lần để thấy lịch sử.</p></div>`}
+else{html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3><p style="color:#999;font-size:13px">Chưa có lịch sử thay đổi. Cập nhật data vài lần để thấy lịch sử.</p></div>`}
 document.getElementById('modalTitle').textContent=partner;
 document.getElementById('modalBody').innerHTML=html;
 document.getElementById('partnerModal').classList.add('active');
 document.body.style.overflow='hidden'}
+function toggleProjHistory(idx){const row=document.getElementById('projhist-'+idx);if(row.style.display==='none'){row.style.display='table-row'}else{row.style.display='none'}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
 function filterData(){
 const search=document.getElementById('search').value.toLowerCase(),pv=document.getElementById('partnerFilter').value;
