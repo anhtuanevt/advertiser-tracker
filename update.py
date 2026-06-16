@@ -468,17 +468,17 @@ tr.row-changed:hover{background:#fff3cd!important}
 </div>
 </div>
 </div>
-<div class="camp-filters" id="campFilters" style="display:none">
-<div class="camp-chip active" onclick="setCampFilter('all')" id="campAll">Tất cả</div>
-<div class="camp-chip" onclick="setCampFilter('Đang chạy')" id="campRunning">Đang chạy</div>
-<div class="camp-chip" onclick="setCampFilter('Tạm ngưng')" id="campPaused">Tạm ngưng</div>
-<div class="camp-chip" onclick="setCampFilter('Bỏ')" id="campStopped">Bỏ</div>
-</div>
 <div class="tabs">
 <div class="tab active" onclick="switchView('detail')" id="tabDetail">Chi tiết dự án</div>
 <div class="tab" onclick="switchView('affiliate')" id="tabAffiliate">Affiliate</div>
 <div class="tab" onclick="switchView('camp')" id="tabCamp">Camp</div>
 <div class="tab" onclick="switchView('summary')" id="tabSummary">Tổng hợp theo nhà QC</div>
+</div>
+<div class="camp-filters" id="campFilters" style="display:none">
+<div class="camp-chip active" onclick="setCampFilter('all')" id="campAll">Tất cả</div>
+<div class="camp-chip" onclick="setCampFilter('Đang chạy')" id="campRunning">Đang chạy</div>
+<div class="camp-chip" onclick="setCampFilter('Tạm ngưng')" id="campPaused">Tạm ngưng</div>
+<div class="camp-chip" onclick="setCampFilter('Bỏ')" id="campStopped">Bỏ</div>
 </div>
 <div class="table-wrap"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
 
