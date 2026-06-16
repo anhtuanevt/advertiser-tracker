@@ -411,6 +411,10 @@ tr.row-changed:hover{background:#fff3cd!important}
 .change-filters{display:flex;gap:6px;justify-content:center;margin-bottom:0;flex-wrap:wrap}
 /* Edit modal */
 .edit-modal{background:#fff;border-radius:16px;width:100%;max-width:460px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.partner-suggest{position:absolute;top:0;left:0;right:0;max-height:200px;overflow-y:auto;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:100}
+.partner-suggest-item{padding:8px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid #f0f0f0}
+.partner-suggest-item:hover{background:#eef2f7}
+.partner-suggest-item:last-child{border-bottom:none}
 .edit-field{margin-bottom:14px}
 .edit-field label{display:block;font-size:11px;font-weight:700;color:#16213e;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
 .edit-field input[type=text]{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none;transition:border-color .2s}
@@ -520,7 +524,7 @@ tr.row-changed:hover{background:#fff3cd!important}
 <div class="edit-modal">
 <div class="modal-header"><h2>Thêm dự án mới</h2><button class="modal-close" onclick="closeAddModal()">&times;</button></div>
 <div class="modal-body" style="padding:20px 24px">
-<div class="edit-field"><label>Nhà QC (Partner) *</label><input type="text" id="addPartner" placeholder="Tên nhà quảng cáo..."></div>
+<div class="edit-field"><label>Nhà QC (Partner) *</label><input type="text" id="addPartner" placeholder="Tên nhà quảng cáo..." autocomplete="off" oninput="handlePartnerInput(this.value)" onfocus="showPartnerSuggestions()" onblur="setTimeout(()=>hidePartnerSuggestions(),200)"><div id="partnerSuggestions" style="display:none;position:relative"></div></div>
 <div class="edit-field"><label>URL *</label><input type="text" id="addUrl" placeholder="https://example.com" oninput="previewDomain()"></div>
 <div class="edit-field" id="addDomainPreview" style="display:none"><label>Domain (tự động)</label><div style="padding:9px 12px;background:#f0f2f5;border-radius:8px;font-size:13px;color:#0f3460;font-weight:600" id="addDomainText"></div></div>
 <div class="edit-field"><label>Trạng thái</label><select id="addStatus" style="width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none"><option value="Đang chạy">Đang chạy</option><option value="Ngưng chạy">Ngưng chạy</option></select></div>
@@ -733,8 +737,29 @@ function openAddModal(autoDuyet){
   document.getElementById('addDuyet').checked=!!autoDuyet;
   document.getElementById('addAdLibrary').value='';
   document.getElementById('addDomainPreview').style.display='none';
+  document.getElementById('partnerSuggestions').style.display='none';
   document.getElementById('addModal').classList.add('active');
   document.body.style.overflow='hidden';
+}
+function getAllPartners(){return [...new Set(rawData.map(r=>r.partner))].sort()}
+function handlePartnerInput(val){
+  showPartnerSuggestions(val);
+}
+function showPartnerSuggestions(filter){
+  const box=document.getElementById('partnerSuggestions');
+  const val=(filter!==undefined?filter:document.getElementById('addPartner').value).toLowerCase().trim();
+  if(!val){box.style.display='none';return}
+  const all=getAllPartners();
+  const matches=all.filter(p=>p.toLowerCase().includes(val)).slice(0,8);
+  if(!matches.length){box.style.display='none';return}
+  box.innerHTML=matches.map(p=>`<div class="partner-suggest-item" onclick="selectPartner('${p.replace(/'/g,"\\'")}')">${escapeHtml(p)}</div>`).join('');
+  box.style.display='block';
+}
+function hidePartnerSuggestions(){document.getElementById('partnerSuggestions').style.display='none'}
+function selectPartner(name){
+  document.getElementById('addPartner').value=name;
+  hidePartnerSuggestions();
+  document.getElementById('addUrl').focus();
 }
 function closeAddModal(){document.getElementById('addModal').classList.remove('active');document.body.style.overflow='';}
 async function saveAddProject(){
