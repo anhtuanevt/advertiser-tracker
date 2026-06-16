@@ -26,7 +26,7 @@ h1{text-align:center;margin-bottom:2px;color:#16213e;font-size:22px}
 .tab:not(:first-child){border-left:none}
 .tab:last-child{border-radius:0 8px 8px 0}
 .tab.active{background:#0f3460;color:#fff;border-color:#0f3460}
-.table-wrap{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden;max-height:calc(100vh - 250px);overflow-y:auto}
+.table-wrap{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 270px);overflow-x:auto;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 thead{position:sticky;top:0;background:#16213e;color:#fff;z-index:10}
 thead th{padding:9px 12px;text-align:left;font-weight:600;white-space:nowrap;cursor:pointer;user-select:none}
@@ -43,9 +43,10 @@ tbody td a:hover{text-decoration:underline}
 .badge.new{background:#cce5ff;color:#004085}
 .badge.removed{background:#f8d7da;color:#721c24}
 .badge.changed{background:#fff3cd;color:#856404}
+.badge.duyet{background:#d4edda;color:#155724}
 .partner-cell{font-weight:600;color:#16213e}
 .domain-cell{color:#888;font-size:12px}
-.url-orig-cell{color:#aaa;font-size:12px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.url-orig-cell{color:#aaa;font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .no-results{text-align:center;padding:40px;color:#999}
 .partner-group-row{background:#eef2f7;font-weight:700;color:#0f3460}
 .partner-group-row td{padding:8px 14px;font-size:12px}
@@ -70,7 +71,7 @@ tr.row-changed:hover{background:#fff3cd!important}
 .copy-btn:hover{background:#0f3460;color:#fff}
 .copy-btn svg{width:13px;height:13px;fill:currentColor}
 .copy-btn.copied{background:#28a745;color:#fff}
-/* Modal */
+/* Partner modal */
 .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;justify-content:center;align-items:flex-start;padding:40px 20px;overflow-y:auto}
 .modal-overlay.active{display:flex}
 .modal{background:#fff;border-radius:16px;width:100%;max-width:900px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
@@ -114,23 +115,55 @@ tr.row-changed:hover{background:#fff3cd!important}
 .change-filters{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .chip{padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:2px solid transparent;background:#fff;transition:all .2s}
 .change-filters{display:flex;gap:6px;justify-content:center;margin-bottom:0;flex-wrap:wrap}
+/* Edit modal */
+.edit-modal{background:#fff;border-radius:16px;width:100%;max-width:460px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.edit-field{margin-bottom:14px}
+.edit-field label{display:block;font-size:11px;font-weight:700;color:#16213e;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.edit-field input[type=text]{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none;transition:border-color .2s}
+.edit-field input[type=text]:focus{border-color:#0f3460}
+.edit-checkbox-row{display:flex;align-items:center;gap:10px;padding:6px 0}
+.edit-checkbox-row input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:#0f3460}
+.edit-checkbox-row span{font-size:13px;color:#333}
+.edit-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid #f0f0f0}
+.btn-save{padding:8px 22px;background:#0f3460;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-save:hover:not(:disabled){background:#16213e}
+.btn-save:disabled{background:#aaa;cursor:not-allowed}
+.btn-cancel{padding:8px 16px;background:#f0f2f5;color:#333;border:none;border-radius:8px;font-size:13px;cursor:pointer}
+/* Camp filters */
+.camp-filters{display:flex;gap:6px;justify-content:center;margin-bottom:10px;flex-wrap:wrap}
+.camp-chip{padding:5px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:2px solid #ddd;background:#fff;transition:all .2s}
+.camp-chip.active{background:#0f3460;color:#fff;border-color:#0f3460}
+/* Affiliate rows */
+.aff-domain-row{background:#eef2f7;cursor:pointer}
+.aff-domain-row:hover{background:#dce8f5}
+.aff-sub-input{width:200px;padding:3px 7px;border:1px solid #ddd;border-radius:4px;font-size:12px;outline:none}
+.aff-sub-input:focus{border-color:#0f3460}
+.aff-sub-textarea{width:240px;min-height:52px;padding:3px 7px;border:1px solid #ddd;border-radius:4px;font-size:12px;outline:none;resize:vertical;font-family:inherit;word-break:break-all}
+.aff-sub-textarea:focus{border-color:#0f3460}
+.aff-sub-select{padding:3px 7px;border:1px solid #ddd;border-radius:4px;font-size:12px;background:#fff;outline:none}
+.btn-del-row{padding:2px 8px;font-size:11px;background:#fee;color:#e94560;border:1px solid #f5c6cb;border-radius:4px;cursor:pointer}
+.btn-add-acc{padding:5px 14px;font-size:12px;font-weight:600;background:#0f3460;color:#fff;border:none;border-radius:6px;cursor:pointer;margin:6px 0 6px 28px}
+.btn-add-acc:hover{background:#16213e}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <h1>Danh sách nhà QC &amp; Dự án</h1>
 <p class="subtitle">Dữ liệu đã chuẩn hóa</p>
-<p class="update-time">Cập nhật lúc: <strong id="updateTime">14/06/2026 15:18:41</strong> <span id="compareInfo" style="margin-left:16px;color:#e94560"></span></p>
+<p class="update-time">Cập nhật lúc: <strong id="updateTime">14/06/2026 22:11:15</strong> <span id="compareInfo" style="margin-left:16px;color:#e94560"></span></p>
 <div class="top-bar">
 <div class="stats">
-<div class="stat-card"><div class="num" id="statPartners">0</div><div class="label">Nhà QC</div></div>
-<div class="stat-card"><div class="num" id="statProjects">0</div><div class="label">Tổng dự án</div></div>
-<div class="stat-card"><div class="num" id="statDomains">0</div><div class="label">Domain</div></div>
-<div class="stat-card"><div class="num" id="statRunning">0</div><div class="label">Đang chạy</div></div>
+<div class="stat-card"><div class="num" id="statPartners">—</div><div class="label">Nhà QC</div></div>
+<div class="stat-card"><div class="num" id="statProjects">—</div><div class="label">Tổng dự án</div></div>
+<div class="stat-card"><div class="num" id="statDomains">—</div><div class="label">Domain</div></div>
+<div class="stat-card"><div class="num" id="statRunning">—</div><div class="label">Đang chạy</div></div>
 <div class="stat-card changes" id="statChangesCard" style="display:none"><div class="num" id="statChanges">0</div><div class="label">Thay đổi</div></div>
 </div>
 <div class="controls">
 <input type="text" id="search" placeholder="Tìm tên nhà QC, domain, URL..." oninput="filterData()">
 <select id="partnerFilter" onchange="filterData()"><option value="">Tất cả nhà QC</option></select>
+<select id="duyetFilter" onchange="filterData()"><option value="">Duyệt: Tất cả</option><option value="1">Đã duyệt</option><option value="0">Chưa duyệt</option></select>
+<button id="refreshBtn" onclick="refreshData()" style="padding:6px 14px;background:#0f3460;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">↻ Làm mới</button>
 <div class="change-filters" id="changeFilters" style="display:none">
 <div class="chip chip-all active" onclick="setChangeFilter('all')" id="chipAll">Tất cả</div>
 <div class="chip chip-new" onclick="setChangeFilter('new')" id="chipNew">Mới thêm</div>
@@ -139,336 +172,442 @@ tr.row-changed:hover{background:#fff3cd!important}
 </div>
 </div>
 </div>
+<div class="camp-filters" id="campFilters" style="display:none">
+<div class="camp-chip active" onclick="setCampFilter('all')" id="campAll">Tất cả</div>
+<div class="camp-chip" onclick="setCampFilter('Đang chạy')" id="campRunning">Đang chạy</div>
+<div class="camp-chip" onclick="setCampFilter('Tạm ngưng')" id="campPaused">Tạm ngưng</div>
+<div class="camp-chip" onclick="setCampFilter('Bỏ')" id="campStopped">Bỏ</div>
+</div>
 <div class="tabs">
 <div class="tab active" onclick="switchView('detail')" id="tabDetail">Chi tiết dự án</div>
+<div class="tab" onclick="switchView('affiliate')" id="tabAffiliate">Affiliate</div>
+<div class="tab" onclick="switchView('camp')" id="tabCamp">Camp</div>
 <div class="tab" onclick="switchView('summary')" id="tabSummary">Tổng hợp theo nhà QC</div>
 </div>
 <div class="table-wrap"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
+
+<!-- Partner detail modal -->
 <div class="modal-overlay" id="partnerModal" onclick="if(event.target===this)closeModal()">
 <div class="modal">
-<div class="modal-header">
-<h2 id="modalTitle"></h2>
-<button class="modal-close" onclick="closeModal()">&times;</button>
-</div>
+<div class="modal-header"><h2 id="modalTitle"></h2><button class="modal-close" onclick="closeModal()">&times;</button></div>
 <div class="modal-body" id="modalBody"></div>
 </div>
 </div>
+
+<!-- Edit modal (Duyệt / Traffic / Ghi chú) -->
+<div class="modal-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+<div class="edit-modal">
+<div class="modal-header"><h2 id="editModalTitle">Chỉnh sửa</h2><button class="modal-close" onclick="closeEditModal()">&times;</button></div>
+<div class="modal-body" style="padding:20px 24px">
+<div class="edit-field">
+  <label>Duyệt (đưa vào tab Affiliate)</label>
+  <div class="edit-checkbox-row"><input type="checkbox" id="editDuyet"><span>Dự án này đã được duyệt để đăng ký Affiliate</span></div>
+</div>
+<div class="edit-field"><label>Traffic</label><input type="text" id="editTraffic" placeholder="Điền thông tin traffic..."></div>
+<div class="edit-field"><label>Ghi chú</label><input type="text" id="editGhiChu" placeholder="Ghi chú..."></div>
+<div class="edit-field"><label>Chính sách Ads</label><select id="editAdsPolicy" style="width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none"><option value="">Chưa xác định</option><option value="Cho chạy Ads">Cho chạy Ads</option><option value="Cấm Brand">Cấm Brand</option><option value="Cấm SEM">Cấm SEM</option><option value="Cấm hoàn toàn">Cấm hoàn toàn</option></select></div>
+<div class="edit-field"><label>Traffic Type</label><select id="editTrafficType" style="width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none" onchange="document.getElementById('editDurationField').style.display=this.value==='Recurring'?'block':'none'"><option value="">Chưa xác định</option><option value="Recurring">Recurring</option><option value="One-time">One-time</option><option value="Lifetime">Lifetime</option></select></div>
+<div class="edit-field" id="editDurationField" style="display:none"><label>Thời hạn (Recurring)</label><input type="text" id="editTrafficDuration" placeholder="VD: 30 ngày, 3 tháng..."></div>
+<div class="edit-field"><label>Cookies</label><input type="text" id="editCookies" placeholder="Thời hạn cookies..."></div>
+<div class="edit-field"><label>% Hoa hồng</label><input type="text" id="editHoaHong" placeholder="VD: 30%, 50%..."></div>
+<div class="edit-actions">
+<button class="btn-cancel" onclick="closeEditModal()">Hủy</button>
+<button class="btn-save" id="editSaveBtn" onclick="saveEdit()">Lưu</button>
+</div>
+</div>
+</div>
+</div>
+
 <script>
-const rawData=[{partner:"NGUYEN THI BICH HA",url_original:"https://www.purevpn.com/",domain:"purevpn.com",url_normalized:"https://purevpn.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NGUYEN THI BICH HA",url_original:"https://www.apollo.io/",domain:"apollo.io",url_normalized:"https://apollo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NGUYEN THI BICH HA",url_original:"https://murf.ai/",domain:"murf.ai",url_normalized:"https://murf.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NGUYEN THI BICH HA",url_original:"https://www.typeform.com/",domain:"typeform.com",url_normalized:"https://typeform.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NGUYEN THI BICH HA",url_original:"https://www.browse.ai/",domain:"browse.ai",url_normalized:"https://browse.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lê Phương Nam",url_original:"https://pictory.ai/",domain:"pictory.ai",url_normalized:"https://pictory.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lê Phương Nam",url_original:"https://www.heygen.com/",domain:"heygen.com",url_normalized:"https://heygen.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lê Phương Nam",url_original:"https://runable.com/",domain:"runable.com",url_normalized:"https://runable.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lê Phương Nam",url_original:"https://www.bluehost.com/",domain:"bluehost.com",url_normalized:"https://bluehost.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lê Phương Nam",url_original:"https://www.frase.io/",domain:"frase.io",url_normalized:"https://frase.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Malaika Khan",url_original:"https://www.quickads.ai/",domain:"quickads.ai",url_normalized:"https://quickads.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Malaika Khan",url_original:"https://www.makeugc.ai/",domain:"makeugc.ai",url_normalized:"https://makeugc.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Malaika Khan",url_original:"https://www.runpod.io/",domain:"runpod.io",url_normalized:"https://runpod.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Malaika Khan",url_original:"https://localo.com/",domain:"localo.com",url_normalized:"https://localo.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Malaika Khan",url_original:"https://customgpt.ai/",domain:"customgpt.ai",url_normalized:"https://customgpt.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",url_original:"https://www.apollo.io/",domain:"apollo.io",url_normalized:"https://apollo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",url_original:"https://www.apollo.io/",domain:"apollo.io",url_normalized:"https://apollo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",url_original:"https://www.thinkific.com/",domain:"thinkific.com",url_normalized:"https://thinkific.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",url_original:"https://www.brevo.com/",domain:"brevo.com",url_normalized:"https://brevo.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",url_original:"https://www.deel.com/",domain:"deel.com",url_normalized:"https://deel.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",url_original:"https://akool.com/",domain:"akool.com",url_normalized:"https://akool.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",url_original:"https://www.argil.ai/",domain:"argil.ai",url_normalized:"https://argil.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",url_original:"https://scholarai.io/",domain:"scholarai.io",url_normalized:"https://scholarai.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",url_original:"https://www.goenhance.ai/",domain:"goenhance.ai",url_normalized:"https://goenhance.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",url_original:"https://klap.app/",domain:"klap.app",url_normalized:"https://klap.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"luong tan thanh",url_original:"https://klap.app/",domain:"klap.app",url_normalized:"https://klap.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR18012843404903317505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"luong tan thanh",url_original:"https://www.adspower.com/",domain:"adspower.com",url_normalized:"https://adspower.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR18012843404903317505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"luong tan thanh",url_original:"https://abacus.ai/",domain:"abacus.ai",url_normalized:"https://abacus.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR18012843404903317505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"luong tan thanh",url_original:"https://hunter.io/",domain:"hunter.io",url_normalized:"https://hunter.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR18012843404903317505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Thuy Nguyen",url_original:"Syllaby.io",domain:"syllaby.io",url_normalized:"https://syllaby.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Thuy Nguyen",url_original:"https://www.revid.ai/",domain:"revid.ai",url_normalized:"https://revid.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Thuy Nguyen",url_original:"https://clickmeeting.com/",domain:"clickmeeting.com",url_normalized:"https://clickmeeting.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Thuy Nguyen",url_original:"https://www.coupler.io/",domain:"coupler.io",url_normalized:"https://coupler.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Thuy Nguyen",url_original:"https://www.mureka.ai/",domain:"mureka.ai",url_normalized:"https://mureka.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NMDDS LLC",url_original:"https://reclaim.ai/?utm_campaign=partnerstack&utm_term=ps_3861744d15df&pscd=go.reclaim.ai&ps_partner_key=Mzg2MTc0NGQxNWRm&ps_xid=OjWzRuMcM7hVVd&gsxid=OjWzRuMcM7hVVd&gspk=Mzg2MTc0NGQxNWRm&gad_source=1",domain:"reclaim.ai",url_normalized:"https://reclaim.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NMDDS LLC",url_original:"https://learningstudioai.com/",domain:"learningstudioai.com",url_normalized:"https://learningstudioai.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NMDDS LLC",url_original:"https://www.taja.ai/",domain:"taja.ai",url_normalized:"https://taja.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NMDDS LLC",url_original:"https://www.kimp.io/",domain:"kimp.io",url_normalized:"https://kimp.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NMDDS LLC",url_original:"https://www.engagebay.com/",domain:"engagebay.com",url_normalized:"https://engagebay.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AFFI",url_original:"https://www.kajabi.com/",domain:"kajabi.com",url_normalized:"https://kajabi.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AFFI",url_original:"https://undetectable.ai/",domain:"undetectable.ai",url_normalized:"https://undetectable.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AFFI",url_original:"https://www.skool.com/",domain:"skool.com",url_normalized:"https://skool.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AFFI",url_original:"https://phantombuster.com/",domain:"phantombuster.com",url_normalized:"https://phantombuster.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AFFI",url_original:"https://gumroad.com/",domain:"gumroad.com",url_normalized:"https://gumroad.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"digital funda",url_original:"https://www.whispertranscribe.com/",domain:"whispertranscribe.com",url_normalized:"https://whispertranscribe.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"digital funda",url_original:"https://moosend.com/",domain:"moosend.com",url_normalized:"https://moosend.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"digital funda",url_original:"https://blubrry.com/",domain:"blubrry.com",url_normalized:"https://blubrry.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"digital funda",url_original:"https://www.autoclips.app/",domain:"autoclips.app",url_normalized:"https://autoclips.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"digital funda",url_original:"https://www.nedzo.ai/",domain:"nedzo.ai",url_normalized:"https://nedzo.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Оксана Шклярчук",url_original:"https://www.guideflow.com/",domain:"guideflow.com",url_normalized:"https://guideflow.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Оксана Шклярчук",url_original:"https://qxbroker.net/",domain:"qxbroker.net",url_normalized:"https://qxbroker.net",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Оксана Шклярчук",url_original:"https://abacus.ai/",domain:"abacus.ai",url_normalized:"https://abacus.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Оксана Шклярчук",url_original:"https://www.factors.ai/",domain:"factors.ai",url_normalized:"https://factors.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Оксана Шклярчук",url_original:"https://ahaslides.com/vi/",domain:"ahaslides.com",url_normalized:"https://ahaslides.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Semantic Holdings, Inc",url_original:"https://alttext.ai/",domain:"alttext.ai",url_normalized:"https://alttext.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Semantic Holdings, Inc",url_original:"https://demodesk.com/",domain:"demodesk.com",url_normalized:"https://demodesk.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Semantic Holdings, Inc",url_original:"https://www.insightful.io/",domain:"insightful.io",url_normalized:"https://insightful.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Semantic Holdings, Inc",url_original:"https://wpx.net/",domain:"wpx.net",url_normalized:"https://wpx.net",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Semantic Holdings, Inc",url_original:"https://passion.io/",domain:"passion.io",url_normalized:"https://passion.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"IT Solutions FZCO",url_original:"https://kahunas.io/",domain:"kahunas.io",url_normalized:"https://kahunas.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR07675194828119867393?origin=ata&region=VN",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"IT Solutions FZCO",url_original:"https://www.vidalytics.com/",domain:"vidalytics.com",url_normalized:"https://vidalytics.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR07675194828119867393?origin=ata&region=VN",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"https://www.uplead.com/",domain:"uplead.com",url_normalized:"https://uplead.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"https://fliki.ai/",domain:"fliki.ai",url_normalized:"https://fliki.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"https://www.timedoctor.com/",domain:"timedoctor.com",url_normalized:"https://timedoctor.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"https://leadpages.com/",domain:"leadpages.com",url_normalized:"https://leadpages.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"https://www.dupdub.com/",domain:"dupdub.com",url_normalized:"https://dupdub.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"the JAR group",url_original:"https://gobii.ai/",domain:"gobii.ai",url_normalized:"https://gobii.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"the JAR group",url_original:"https://www.frase.io/",domain:"frase.io",url_normalized:"https://frase.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"the JAR group",url_original:"https://vidgenie.ai/",domain:"vidgenie.ai",url_normalized:"https://vidgenie.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"the JAR group",url_original:"https://travelingmailbox.com/",domain:"travelingmailbox.com",url_normalized:"https://travelingmailbox.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"the JAR group",url_original:"https://www.castmenow.co/",domain:"castmenow.co",url_normalized:"https://castmenow.co",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CodeCat, s.r.o.",url_original:"https://mangools.com/",domain:"mangools.com",url_normalized:"https://mangools.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05538899415307124737?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"CodeCat, s.r.o.",url_original:"https://uptimerobot.com/",domain:"uptimerobot.com",url_normalized:"https://uptimerobot.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05538899415307124737?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AdtechMatrix",url_original:"https://sintra.ai/",domain:"sintra.ai",url_normalized:"https://sintra.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AdtechMatrix",url_original:"https://www.brevo.com/",domain:"brevo.com",url_normalized:"https://brevo.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AdtechMatrix",url_original:"https://monday.com/",domain:"monday.com",url_normalized:"https://monday.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AdtechMatrix",url_original:"https://tryholo.ai/",domain:"tryholo.ai",url_normalized:"https://tryholo.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"AdtechMatrix",url_original:"https://www.kovocredit.com/",domain:"kovocredit.com",url_normalized:"https://kovocredit.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"cloudways.com",domain:"cloudways.com",url_normalized:"https://cloudways.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"blueberryfunded.com",domain:"blueberryfunded.com",url_normalized:"https://blueberryfunded.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"magicfit.com",domain:"magicfit.com",url_normalized:"https://magicfit.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"openart.ai",domain:"openart.ai",url_normalized:"https://openart.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"membership.io",domain:"membership.io",url_normalized:"https://membership.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"carrd.co",domain:"carrd.co",url_normalized:"https://carrd.co",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"sendshort.ai",domain:"sendshort.ai",url_normalized:"https://sendshort.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"uptimerobot.com",domain:"uptimerobot.com",url_normalized:"https://uptimerobot.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"spocket.co",domain:"spocket.co",url_normalized:"https://spocket.co",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"syllaby.io",domain:"syllaby.io",url_normalized:"https://syllaby.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"nutshell.com",domain:"nutshell.com",url_normalized:"https://nutshell.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",url_original:"seamless.ai",domain:"seamless.ai",url_normalized:"https://seamless.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"DIGIDREAM.s.r.o.",url_original:"systeme.io",domain:"systeme.io",url_normalized:"https://systeme.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04187595690580377601?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"DIGIDREAM.s.r.o.",url_original:"gohighlevel",domain:"gohighlevel",url_normalized:"https://gohighlevel",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04187595690580377601?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"DIGIDREAM.s.r.o.",url_original:"skool.com",domain:"skool.com",url_normalized:"https://skool.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04187595690580377601?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"DIGIDREAM.s.r.o.",url_original:"proofreadanywhere.com",domain:"proofreadanywhere.com",url_normalized:"https://proofreadanywhere.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR04187595690580377601?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Adcore East Limited",url_original:"crateandbarrel.com",domain:"crateandbarrel.com",url_normalized:"https://crateandbarrel.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Adcore East Limited",url_original:"mecool.com",domain:"mecool.com",url_normalized:"https://mecool.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Adcore East Limited",url_original:"cosori.de",domain:"cosori.de",url_normalized:"https://cosori.de",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Adcore East Limited",url_original:"alamy.com",domain:"alamy.com",url_normalized:"https://alamy.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Adcore East Limited",url_original:"kreo.app",domain:"kreo.app",url_normalized:"https://kreo.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"QUAN VŨ NAM",url_original:"sanebox.com",domain:"sanebox.com",url_normalized:"https://sanebox.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"QUAN VŨ NAM",url_original:"vast.ai",domain:"vast.ai",url_normalized:"https://vast.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"https://abacus.ai/",domain:"abacus.ai",url_normalized:"https://abacus.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"inet.vn",domain:"inet.vn",url_normalized:"https://inet.vn",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"gamma.app",domain:"gamma.app",url_normalized:"https://gamma.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"close.com",domain:"close.com",url_normalized:"https://close.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"cloudways.com",domain:"cloudways.com",url_normalized:"https://cloudways.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"treble.ai",domain:"treble.ai",url_normalized:"https://treble.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"South Wind Tech Limited",url_original:"hitechdiamond.com",domain:"hitechdiamond.com",url_normalized:"https://hitechdiamond.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"OCEAN SUNRISE LIMITED",url_original:"https://n8n.io/",domain:"n8n.io",url_normalized:"https://n8n.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03858991427845357569?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"OCEAN SUNRISE LIMITED",url_original:"https://geonode.com/",domain:"geonode.com",url_normalized:"https://geonode.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR03858991427845357569?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"syntx.ai",domain:"syntx.ai",url_normalized:"https://syntx.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"vast.ai",domain:"vast.ai",url_normalized:"https://vast.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"https://abacus.ai/",domain:"abacus.ai",url_normalized:"https://abacus.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"soundeo.com",domain:"soundeo.com",url_normalized:"https://soundeo.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"atoms.dev",domain:"atoms.dev",url_normalized:"https://atoms.dev",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Tran Hong Quan",url_original:"reisoft.io",domain:"reisoft.io",url_normalized:"https://reisoft.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"NGUYỄN ĐĂNG HIẾU",url_original:"vectorizer.ai",domain:"vectorizer.ai",url_normalized:"https://vectorizer.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16517021435189788673?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Dương Danh Tuấn",url_original:"Dragapp.com",domain:"dragapp.com",url_normalized:"https://dragapp.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR08190999346439782401?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Dương Danh Tuấn",url_original:"readdy.ai",domain:"readdy.ai",url_normalized:"https://readdy.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR08190999346439782401?region=anywhere&platform=SEARCH",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"invideo.io",domain:"invideo.io",url_normalized:"https://invideo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"toolsaday.com",domain:"toolsaday.com",url_normalized:"https://toolsaday.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"popai.pro",domain:"popai.pro",url_normalized:"https://popai.pro",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"syllaby.io",domain:"syllaby.io",url_normalized:"https://syllaby.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"colourlab.ai",domain:"colourlab.ai",url_normalized:"https://colourlab.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"makeugc.ai",domain:"makeugc.ai",url_normalized:"https://makeugc.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"collov.ai",domain:"collov.ai",url_normalized:"https://collov.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Vu Thi Van Ha",url_original:"weshop.ai",domain:"weshop.ai",url_normalized:"https://weshop.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",url_original:"postscript.io",domain:"postscript.io",url_normalized:"https://postscript.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",url_original:"instapage.com",domain:"instapage.com",url_normalized:"https://instapage.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",url_original:"weblium.com",domain:"weblium.com",url_normalized:"https://weblium.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",url_original:"restream.io",domain:"restream.io",url_normalized:"https://restream.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",url_original:"rytr.me",domain:"rytr.me",url_normalized:"https://rytr.me",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://monday.com/",domain:"monday.com",url_normalized:"https://monday.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://www.apollo.io/",domain:"apollo.io",url_normalized:"https://apollo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://www.wati.io/",domain:"wati.io",url_normalized:"https://wati.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://www.nutshell.com/",domain:"nutshell.com",url_normalized:"https://nutshell.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://www.softr.io/",domain:"softr.io",url_normalized:"https://softr.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"GETYOURGUIDE UK LTD",url_original:"https://vwo.com/",domain:"vwo.com",url_normalized:"https://vwo.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"mubert.com",domain:"mubert.com",url_normalized:"https://mubert.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"voicetype.com",domain:"voicetype.com",url_normalized:"https://voicetype.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"invideo.io",domain:"invideo.io",url_normalized:"https://invideo.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"leadpages.com",domain:"leadpages.com",url_normalized:"https://leadpages.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"ahaslides.com",domain:"ahaslides.com",url_normalized:"https://ahaslides.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"murf.ai",domain:"murf.ai",url_normalized:"https://murf.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"snov.io",domain:"snov.io",url_normalized:"https://snov.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"dext.com",domain:"dext.com",url_normalized:"https://dext.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"fastmail.com",domain:"fastmail.com",url_normalized:"https://fastmail.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"dify.ai",domain:"dify.ai",url_normalized:"https://dify.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"postpone.app",domain:"postpone.app",url_normalized:"https://postpone.app",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"postplanner.com",domain:"postplanner.com",url_normalized:"https://postplanner.com",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"magiclight.ai",domain:"magiclight.ai",url_normalized:"https://magiclight.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"chatsimple.ai",domain:"chatsimple.ai",url_normalized:"https://chatsimple.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"onestream.live",domain:"onestream.live",url_normalized:"https://onestream.live",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"KLIK Michał Listwoń",url_original:"pricefy.io",domain:"pricefy.io",url_normalized:"https://pricefy.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lâm văn Ngát",url_original:"zerossl.com",domain:"zerossl.com",url_normalized:"https://zerossl.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=L%C3%A2m%20v%C4%83n%20Ng%C3%A1t&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Lâm văn Ngát",url_original:"smodin.io",domain:"smodin.io",url_normalized:"https://smodin.io",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=L%C3%A2m%20v%C4%83n%20Ng%C3%A1t&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"BÙI VĂN THẮNG",url_original:"Syllaby.io",domain:"syllaby.io",url_normalized:"https://syllaby.io",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=B%C3%99I%20V%C4%82N%20TH%E1%BA%AENG&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"BÙI VĂN THẮNG",url_original:"onestream.live",domain:"onestream.live",url_normalized:"https://onestream.live",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=B%C3%99I%20V%C4%82N%20TH%E1%BA%AENG&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Nathaniel Kym Pike",url_original:"Syllaby.io",domain:"syllaby.io",url_normalized:"https://syllaby.io",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Nathaniel%20Kym%20Pike&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Nathaniel Kym Pike",url_original:"soundraw,io",domain:"soundraw,io",url_normalized:"https://soundraw,io",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Nathaniel%20Kym%20Pike&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Nathaniel Kym Pike",url_original:"onestream.live",domain:"onestream.live",url_normalized:"https://onestream.live",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Nathaniel%20Kym%20Pike&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"flowith.io",domain:"flowith.io",url_normalized:"https://flowith.io",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"folk.app",domain:"folk.app",url_normalized:"https://folk.app",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"adcreative.ai",domain:"adcreative.ai",url_normalized:"https://adcreative.ai",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"firecrawl.dev",domain:"firecrawl.dev",url_normalized:"https://firecrawl.dev",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"beehiv.com",domain:"beehiv.com",url_normalized:"https://beehiv.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"wisprflow.ai",domain:"wisprflow.ai",url_normalized:"https://wisprflow.ai",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"magica.com",domain:"magica.com",url_normalized:"https://magica.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"cloudways.com",domain:"cloudways.com",url_normalized:"https://cloudways.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"glam.ai",domain:"glam.ai",url_normalized:"https://glam.ai",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"ascn.ai",domain:"ascn.ai",url_normalized:"https://ascn.ai",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"SHASTUN NADIIA",url_original:"instantly.ai",domain:"instantly.ai",url_normalized:"https://instantly.ai",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Quince Wong",url_original:"klaviyo.com",domain:"klaviyo.com",url_normalized:"https://klaviyo.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Quince Wong",url_original:"gumroad.com",domain:"gumroad.com",url_normalized:"https://gumroad.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Quince Wong",url_original:"flowalgo.com",domain:"flowalgo.com",url_normalized:"https://flowalgo.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Quince Wong",url_original:"getreditus.com",domain:"getreditus.com",url_normalized:"https://getreditus.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Quince Wong",url_original:"carrot.com",domain:"carrot.com",url_normalized:"https://carrot.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Davide Orefice",url_original:"collaborator.pro",domain:"collaborator.pro",url_normalized:"https://collaborator.pro",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Davide Orefice",url_original:"trackdesk.com",domain:"trackdesk.com",url_normalized:"https://trackdesk.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Davide Orefice",url_original:"smartsup.com",domain:"smartsup.com",url_normalized:"https://smartsup.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Davide Orefice",url_original:"zap-hosting.com",domain:"zap-hosting.com",url_normalized:"https://zap-hosting.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Davide Orefice",url_original:"clickfunnels.com",domain:"clickfunnels.com",url_normalized:"https://clickfunnels.com",status:"Đang chạy",ad_library_url:"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://bookbolt.io/?_gl=1%2Awj81su%2A_up%2AMQ..%2A_gs%2AMQ..&gclid=Cj0KCQjw3K7RBhDJARIsAKRtP5SxNmuaeAlMhYtb3IK2sgbhYtd_yUNNv4D3PKB89jmomlA_pYCBmA8aAk6gEALw_wcB&gbraid=0AAAAAoJWrVMzZT8LFDhBdqcXsQAy3NPLC",domain:"bookbolt.io",url_normalized:"https://bookbolt.io",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://crayo.ai/",domain:"crayo.ai",url_normalized:"https://crayo.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://ladipage.vn/?gclid=Cj0KCQjw3K7RBhDJARIsAKRtP5TV5ZM5YYIG72lkMxDlBflr2iLdnc_CR8wLM8ps9mh6VLAQYsR_k0IaAjeREALw_wcB&gbraid=0AAAABDFQ2P945jZi5PFG8ysQFkGT6TD6w&ref=landi431&referrer=www.google.com",domain:"ladipage.vn",url_normalized:"https://ladipage.vn",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://pictory.ai/",domain:"pictory.ai",url_normalized:"https://pictory.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://humanizeaitext.ai/",domain:"humanizeaitext.ai",url_normalized:"https://humanizeaitext.ai",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"},
-{partner:"Xun Meng International Limited",url_original:"https://www.ownr.co/",domain:"ownr.co",url_normalized:"https://ownr.co",status:"Đang chạy",ad_library_url:"https://adstransparency.google.com/?region=anywhere",change:"same",old_status:"",last_date:"14/06/2026 15:04:16"}];
-const summaryData=[{partner:"NGUYEN THI BICH HA",total:5,running:5,new_count:0},
-{partner:"Lê Phương Nam",total:5,running:5,new_count:0},
-{partner:"Malaika Khan",total:5,running:5,new_count:0},
-{partner:"SUBHA CHANDRASEKHAR YAGATEELA",total:5,running:5,new_count:0},
-{partner:"CÔNG TY TNHH TM DV HOÀNG NGỌC",total:5,running:5,new_count:0},
-{partner:"luong tan thanh",total:4,running:4,new_count:0},
-{partner:"Thuy Nguyen",total:5,running:5,new_count:0},
-{partner:"NMDDS LLC",total:5,running:5,new_count:0},
-{partner:"AFFI",total:5,running:5,new_count:0},
-{partner:"digital funda",total:5,running:5,new_count:0},
-{partner:"Оксана Шклярчук",total:5,running:5,new_count:0},
-{partner:"Semantic Holdings, Inc",total:5,running:5,new_count:0},
-{partner:"IT Solutions FZCO",total:2,running:2,new_count:0},
-{partner:"KLIK Michał Listwoń",total:21,running:21,new_count:0},
-{partner:"the JAR group",total:5,running:5,new_count:0},
-{partner:"CodeCat, s.r.o.",total:2,running:2,new_count:0},
-{partner:"AdtechMatrix",total:5,running:5,new_count:0},
-{partner:"H2T MEDIA AND ADVERTISING CO.,LTD",total:12,running:12,new_count:0},
-{partner:"DIGIDREAM.s.r.o.",total:4,running:4,new_count:0},
-{partner:"Adcore East Limited",total:5,running:5,new_count:0},
-{partner:"QUAN VŨ NAM",total:2,running:2,new_count:0},
-{partner:"South Wind Tech Limited",total:7,running:7,new_count:0},
-{partner:"OCEAN SUNRISE LIMITED",total:2,running:2,new_count:0},
-{partner:"Tran Hong Quan",total:6,running:6,new_count:0},
-{partner:"NGUYỄN ĐĂNG HIẾU",total:1,running:1,new_count:0},
-{partner:"Dương Danh Tuấn",total:2,running:2,new_count:0},
-{partner:"Vu Thi Van Ha",total:8,running:8,new_count:0},
-{partner:"TECHTIME SOLUTION (OPC) PRIVATE LIMITED",total:5,running:5,new_count:0},
-{partner:"GETYOURGUIDE UK LTD",total:6,running:6,new_count:0},
-{partner:"Lâm văn Ngát",total:2,running:2,new_count:0},
-{partner:"BÙI VĂN THẮNG",total:2,running:2,new_count:0},
-{partner:"Nathaniel Kym Pike",total:3,running:3,new_count:0},
-{partner:"SHASTUN NADIIA",total:11,running:11,new_count:0},
-{partner:"Quince Wong",total:5,running:5,new_count:0},
-{partner:"Davide Orefice",total:5,running:5,new_count:0},
-{partner:"Xun Meng International Limited",total:6,running:6,new_count:0}];
+const SUPABASE_URL='https://wazuifbaimrxnuocdzvy.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhenVpZmJhaW1yeG51b2NkenZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjQ3MDgsImV4cCI6MjA5NzAwMDcwOH0.4cYBbJoG3CYqDgrSMLcdYc8EwPT-q5WN7CT8EKtrAws';
+const {createClient}=supabase;
+const _sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+// Embedded by Python (comparison metadata - not in Supabase)
 const removedData=[];
 const hasComparison=false;
 const partnerHistory={"NGUYEN THI BICH HA":[{date:"14/06/2026 15:04:16",domain:"purevpn.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"apollo.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"murf.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"typeform.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"browse.ai",action:"added",status:"Đang chạy",old_status:""}],"Lê Phương Nam":[{date:"14/06/2026 15:04:16",domain:"pictory.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"heygen.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"runable.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"bluehost.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"frase.io",action:"added",status:"Đang chạy",old_status:""}],"Malaika Khan":[{date:"14/06/2026 15:04:16",domain:"quickads.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"makeugc.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"runpod.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"localo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"customgpt.ai",action:"added",status:"Đang chạy",old_status:""}],"SUBHA CHANDRASEKHAR YAGATEELA":[{date:"14/06/2026 15:04:16",domain:"apollo.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"thinkific.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"brevo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"deel.com",action:"added",status:"Đang chạy",old_status:""}],"CÔNG TY TNHH TM DV HOÀNG NGỌC":[{date:"14/06/2026 15:04:16",domain:"akool.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"argil.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"scholarai.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"goenhance.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"klap.app",action:"added",status:"Đang chạy",old_status:""}],"luong tan thanh":[{date:"14/06/2026 15:04:16",domain:"klap.app",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"adspower.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"abacus.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"hunter.io",action:"added",status:"Đang chạy",old_status:""}],"Thuy Nguyen":[{date:"14/06/2026 15:04:16",domain:"syllaby.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"revid.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"clickmeeting.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"coupler.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"mureka.ai",action:"added",status:"Đang chạy",old_status:""}],"NMDDS LLC":[{date:"14/06/2026 15:04:16",domain:"reclaim.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"learningstudioai.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"taja.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"kimp.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"engagebay.com",action:"added",status:"Đang chạy",old_status:""}],"AFFI":[{date:"14/06/2026 15:04:16",domain:"kajabi.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"undetectable.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"skool.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"phantombuster.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"gumroad.com",action:"added",status:"Đang chạy",old_status:""}],"digital funda":[{date:"14/06/2026 15:04:16",domain:"whispertranscribe.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"moosend.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"blubrry.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"autoclips.app",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"nedzo.ai",action:"added",status:"Đang chạy",old_status:""}],"Оксана Шклярчук":[{date:"14/06/2026 15:04:16",domain:"guideflow.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"qxbroker.net",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"abacus.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"factors.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"ahaslides.com",action:"added",status:"Đang chạy",old_status:""}],"Semantic Holdings, Inc":[{date:"14/06/2026 15:04:16",domain:"alttext.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"demodesk.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"insightful.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"wpx.net",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"passion.io",action:"added",status:"Đang chạy",old_status:""}],"IT Solutions FZCO":[{date:"14/06/2026 15:04:16",domain:"kahunas.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"vidalytics.com",action:"added",status:"Đang chạy",old_status:""}],"KLIK Michał Listwoń":[{date:"14/06/2026 15:04:16",domain:"uplead.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"fliki.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"timedoctor.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"leadpages.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"dupdub.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"mubert.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"voicetype.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"invideo.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"ahaslides.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"murf.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"snov.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"dext.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"fastmail.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"dify.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"postpone.app",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"postplanner.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"magiclight.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"chatsimple.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"onestream.live",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"pricefy.io",action:"added",status:"Đang chạy",old_status:""}],"the JAR group":[{date:"14/06/2026 15:04:16",domain:"gobii.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"frase.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"vidgenie.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"travelingmailbox.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"castmenow.co",action:"added",status:"Đang chạy",old_status:""}],"CodeCat, s.r.o.":[{date:"14/06/2026 15:04:16",domain:"mangools.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"uptimerobot.com",action:"added",status:"Đang chạy",old_status:""}],"AdtechMatrix":[{date:"14/06/2026 15:04:16",domain:"sintra.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"brevo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"monday.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"tryholo.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"kovocredit.com",action:"added",status:"Đang chạy",old_status:""}],"H2T MEDIA AND ADVERTISING CO.,LTD":[{date:"14/06/2026 15:04:16",domain:"cloudways.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"blueberryfunded.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"magicfit.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"openart.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"membership.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"carrd.co",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"sendshort.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"uptimerobot.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"spocket.co",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"syllaby.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"nutshell.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"seamless.ai",action:"added",status:"Đang chạy",old_status:""}],"DIGIDREAM.s.r.o.":[{date:"14/06/2026 15:04:16",domain:"systeme.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"gohighlevel",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"skool.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"proofreadanywhere.com",action:"added",status:"Đang chạy",old_status:""}],"Adcore East Limited":[{date:"14/06/2026 15:04:16",domain:"crateandbarrel.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"mecool.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"cosori.de",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"alamy.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"kreo.app",action:"added",status:"Đang chạy",old_status:""}],"QUAN VŨ NAM":[{date:"14/06/2026 15:04:16",domain:"sanebox.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"vast.ai",action:"added",status:"Đang chạy",old_status:""}],"South Wind Tech Limited":[{date:"14/06/2026 15:04:16",domain:"abacus.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"inet.vn",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"gamma.app",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"close.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"cloudways.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"treble.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"hitechdiamond.com",action:"added",status:"Đang chạy",old_status:""}],"OCEAN SUNRISE LIMITED":[{date:"14/06/2026 15:04:16",domain:"n8n.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"geonode.com",action:"added",status:"Đang chạy",old_status:""}],"Tran Hong Quan":[{date:"14/06/2026 15:04:16",domain:"syntx.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"vast.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"abacus.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"soundeo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"atoms.dev",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"reisoft.io",action:"added",status:"Đang chạy",old_status:""}],"NGUYỄN ĐĂNG HIẾU":[{date:"14/06/2026 15:04:16",domain:"vectorizer.ai",action:"added",status:"Đang chạy",old_status:""}],"Dương Danh Tuấn":[{date:"14/06/2026 15:04:16",domain:"dragapp.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"readdy.ai",action:"added",status:"Đang chạy",old_status:""}],"Vu Thi Van Ha":[{date:"14/06/2026 15:04:16",domain:"invideo.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"toolsaday.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"popai.pro",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"syllaby.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"colourlab.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"makeugc.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"collov.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"weshop.ai",action:"added",status:"Đang chạy",old_status:""}],"TECHTIME SOLUTION (OPC) PRIVATE LIMITED":[{date:"14/06/2026 15:04:16",domain:"postscript.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"instapage.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"weblium.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"restream.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"rytr.me",action:"added",status:"Đang chạy",old_status:""}],"GETYOURGUIDE UK LTD":[{date:"14/06/2026 15:04:16",domain:"monday.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"apollo.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"wati.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"nutshell.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"softr.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"vwo.com",action:"added",status:"Đang chạy",old_status:""}],"Lâm văn Ngát":[{date:"14/06/2026 15:04:16",domain:"zerossl.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"smodin.io",action:"added",status:"Đang chạy",old_status:""}],"BÙI VĂN THẮNG":[{date:"14/06/2026 15:04:16",domain:"syllaby.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"onestream.live",action:"added",status:"Đang chạy",old_status:""}],"Nathaniel Kym Pike":[{date:"14/06/2026 15:04:16",domain:"syllaby.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"soundraw,io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"onestream.live",action:"added",status:"Đang chạy",old_status:""}],"SHASTUN NADIIA":[{date:"14/06/2026 15:04:16",domain:"flowith.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"folk.app",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"adcreative.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"firecrawl.dev",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"beehiv.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"wisprflow.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"magica.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"cloudways.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"glam.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"ascn.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"instantly.ai",action:"added",status:"Đang chạy",old_status:""}],"Quince Wong":[{date:"14/06/2026 15:04:16",domain:"klaviyo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"gumroad.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"flowalgo.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"getreditus.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"carrot.com",action:"added",status:"Đang chạy",old_status:""}],"Davide Orefice":[{date:"14/06/2026 15:04:16",domain:"collaborator.pro",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"trackdesk.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"smartsup.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"zap-hosting.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"clickfunnels.com",action:"added",status:"Đang chạy",old_status:""}],"Xun Meng International Limited":[{date:"14/06/2026 15:04:16",domain:"bookbolt.io",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"crayo.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"ladipage.vn",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"pictory.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"humanizeaitext.ai",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:04:16",domain:"ownr.co",action:"added",status:"Đang chạy",old_status:""}],"Affnads Solutions Private Limited":[{date:"14/06/2026 15:04:16",domain:"creately.com",action:"added",status:"Đang chạy",old_status:""},{date:"14/06/2026 15:07:17",domain:"creately.com",action:"removed",status:"Đang chạy",old_status:""}]};
-const adsLinks={"NGUYEN THI BICH HA":"https://adstransparency.google.com/advertiser/AR06246427743257362433?region=anywhere&start-date=2026-03-01&end-date=2026-06-06","Lê Phương Nam":"https://adstransparency.google.com/advertiser/AR15134633554673139713/creative/CR11074387363860840449?region=anywhere","Malaika Khan":"https://adstransparency.google.com/advertiser/AR02195075751110246401/creative/CR01720719393773584385?region=anywhere","SUBHA CHANDRASEKHAR YAGATEELA":"https://adstransparency.google.com/advertiser/AR03307200735761924097?region=anywhere","CÔNG TY TNHH TM DV HOÀNG NGỌC":"https://adstransparency.google.com/advertiser/AR16546902519100473345/creative/CR05223951937392607233?authuser=0&region=anywhere","luong tan thanh":"https://adstransparency.google.com/advertiser/AR18012843404903317505?region=anywhere","Thuy Nguyen":"https://adstransparency.google.com/advertiser/AR00784393536580616193?region=anywhere","NMDDS LLC":"https://adstransparency.google.com/advertiser/AR04184438271142526977?region=anywhere","AFFI":"https://adstransparency.google.com/advertiser/AR11540623132041674753?region=anywhere","digital funda":"https://adstransparency.google.com/advertiser/AR03750807618340257793?region=anywhere","Оксана Шклярчук":"https://adstransparency.google.com/advertiser/AR01302835877784846337?region=anywhere","Semantic Holdings, Inc":"https://adstransparency.google.com/advertiser/AR03678846892994723841?region=anywhere","IT Solutions FZCO":"https://adstransparency.google.com/advertiser/AR07675194828119867393?origin=ata&region=VN","KLIK Michał Listwoń":"https://adstransparency.google.com/advertiser/AR16273780927363022849?region=anywhere","the JAR group":"https://adstransparency.google.com/advertiser/AR17788391970247278593?region=anywhere","CodeCat, s.r.o.":"https://adstransparency.google.com/advertiser/AR05538899415307124737?region=anywhere","AdtechMatrix":"https://adstransparency.google.com/advertiser/AR00942414282572693505?region=anywhere","H2T MEDIA AND ADVERTISING CO.,LTD":"https://adstransparency.google.com/advertiser/AR05632914514249777153?region=anywhere","DIGIDREAM.s.r.o.":"https://adstransparency.google.com/advertiser/AR04187595690580377601?region=anywhere","Adcore East Limited":"https://adstransparency.google.com/?authuser=0&region=anywhere&platform=SEARCH","QUAN VŨ NAM":"https://adstransparency.google.com/?region=anywhere&platform=SEARCH","South Wind Tech Limited":"https://adstransparency.google.com/?region=anywhere&platform=SEARCH","OCEAN SUNRISE LIMITED":"https://adstransparency.google.com/advertiser/AR03858991427845357569?region=anywhere","Tran Hong Quan":"https://adstransparency.google.com/advertiser/AR14731633062437715969?region=anywhere&platform=SEARCH","NGUYỄN ĐĂNG HIẾU":"https://adstransparency.google.com/advertiser/AR16517021435189788673?region=anywhere&platform=SEARCH","Dương Danh Tuấn":"https://adstransparency.google.com/advertiser/AR08190999346439782401?region=anywhere&platform=SEARCH","Vu Thi Van Ha":"https://adstransparency.google.com/advertiser/AR02405368293499076609?region=anywhere","TECHTIME SOLUTION (OPC) PRIVATE LIMITED":"https://adstransparency.google.com/advertiser/AR10787012588144164865?region=anywhere","GETYOURGUIDE UK LTD":"https://adstransparency.google.com/advertiser/AR11227648744923070465?region=anywhere","Lâm văn Ngát":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=L%C3%A2m%20v%C4%83n%20Ng%C3%A1t&search_type=keyword_unordered","BÙI VĂN THẮNG":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=B%C3%99I%20V%C4%82N%20TH%E1%BA%AENG&search_type=keyword_unordered","Nathaniel Kym Pike":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Nathaniel%20Kym%20Pike&search_type=keyword_unordered","SHASTUN NADIIA":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=SHASTUN%20NADIIA&search_type=keyword_unordered","Quince Wong":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Quince%20Wong&search_type=keyword_unordered","Davide Orefice":"https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=Davide%20Orefice&search_type=keyword_unordered","Xun Meng International Limited":"https://adstransparency.google.com/?region=anywhere"};
-const uniqueDomains=[...new Set(rawData.map(r=>r.domain))];
-document.getElementById('statPartners').textContent=summaryData.length;
-document.getElementById('statProjects').textContent=rawData.length;
-document.getElementById('statDomains').textContent=uniqueDomains.length;
-document.getElementById('statRunning').textContent=rawData.filter(r=>r.status==='Đang chạy').length;
-if(hasComparison){
-const nc=rawData.filter(r=>r.change==='new').length,cc=rawData.filter(r=>r.change==='changed').length,rc=removedData.length;
-document.getElementById('statChangesCard').style.display='block';
-document.getElementById('statChanges').textContent=nc+cc+rc;
-document.getElementById('changeFilters').style.display='flex';
-}
+
+// App state
+let rawData=[],summaryData=[],adsLinks={},affiliateAccounts=[];
 let currentView='detail',sortCol=null,sortAsc=true,changeFilter='all';
+let campFilter='all',expandedDomains=new Set(),editingRow=null;
+
+// Compute helpers
+function computeSummary(data){
+  const m={};
+  data.forEach(r=>{
+    if(!m[r.partner])m[r.partner]={partner:r.partner,total:0,running:0,new_count:0};
+    m[r.partner].total++;
+    if(r.status==='Đang chạy')m[r.partner].running++;
+    if(r.change==='new')m[r.partner].new_count++;
+  });
+  return Object.values(m);
+}
+function computeAdsLinks(data){
+  const l={};
+  data.forEach(r=>{if(r.ad_library_url)l[r.partner]=r.ad_library_url;});
+  return l;
+}
+
+// Load from Supabase
+async function loadAffiliateAccounts(){
+  const{data}=await _sb.from('affiliate_accounts').select('*').order('created_at');
+  affiliateAccounts=data||[];
+}
+
+async function loadData(){
+  document.getElementById('tableBody').innerHTML='<tr><td colspan="12" style="text-align:center;padding:40px;color:#999">Đang tải dữ liệu...</td></tr>';
+  const{data,error}=await _sb.from('projects').select('*');
+  if(error){
+    document.getElementById('tableBody').innerHTML='<tr><td colspan="12" style="text-align:center;padding:40px;color:#e94560">Lỗi tải dữ liệu: '+error.message+'</td></tr>';
+    return;
+  }
+  rawData=data||[];
+  summaryData=computeSummary(rawData);
+  adsLinks=computeAdsLinks(rawData);
+  await loadAffiliateAccounts();
+  const uniqueDomains=[...new Set(rawData.map(r=>r.domain))];
+  document.getElementById('statPartners').textContent=summaryData.length;
+  document.getElementById('statProjects').textContent=rawData.length;
+  document.getElementById('statDomains').textContent=uniqueDomains.length;
+  document.getElementById('statRunning').textContent=rawData.filter(r=>r.status==='Đang chạy').length;
+  if(hasComparison){
+    const nc=rawData.filter(r=>r.change==='new').length,cc=rawData.filter(r=>r.change==='changed').length,rc=removedData.length;
+    document.getElementById('statChangesCard').style.display='block';
+    document.getElementById('statChanges').textContent=nc+cc+rc;
+    document.getElementById('changeFilters').style.display='flex';
+  }
+  const sel=document.getElementById('partnerFilter');
+  sel.innerHTML='<option value="">Tất cả nhà QC</option>';
+  summaryData.forEach(s=>{const o=document.createElement('option');o.value=s.partner;o.textContent=`${s.partner} (${s.total})`;sel.appendChild(o)});
+  filterData();
+}
+
+// Tab switching
+const tabIds={detail:'tabDetail',summary:'tabSummary',affiliate:'tabAffiliate',camp:'tabCamp'};
+async function switchView(v){
+  currentView=v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(tabIds[v]).classList.add('active');
+  document.getElementById('campFilters').style.display=v==='camp'?'flex':'none';
+  if(v==='camp'||v==='affiliate') await loadAffiliateAccounts();
+  filterData();
+}
+async function refreshData(){
+  const btn=document.getElementById('refreshBtn');
+  btn.textContent='⏳ Đang tải...';btn.disabled=true;
+  await loadData();
+  btn.textContent='↻ Làm mới';btn.disabled=false;
+}
 function setChangeFilter(f){changeFilter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));document.getElementById({all:'chipAll',new:'chipNew',changed:'chipChanged',same:'chipSame'}[f]).classList.add('active');filterData()}
-function switchView(v){currentView=v;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(v==='detail'?'tabDetail':'tabSummary').classList.add('active');filterData()}
-function renderHeader(v){const h=document.getElementById('tableHead');if(v==='detail'){const c=hasComparison?'<th>Thay đổi</th>':'';h.innerHTML=`<tr><th>#</th><th onclick="sortBy('partner')">Nhà QC <span class="sort-indicator">↕</span></th><th onclick="sortBy('domain')">Domain <span class="sort-indicator">↕</span></th><th>URL chuẩn hóa</th><th>URL gốc</th><th onclick="sortBy('status')">Trạng thái <span class="sort-indicator">↕</span></th><th onclick="sortBy('last_date')">Ngày cập nhật <span class="sort-indicator">↕</span></th><th>Google Ads Transparency</th>${c}</tr>`}else{const c=hasComparison?`<th onclick="sortBy('new_count')">Mới</th>`:'';h.innerHTML=`<tr><th>#</th><th onclick="sortBy('partner')">Nhà QC <span class="sort-indicator">↕</span></th><th onclick="sortBy('total')">Tổng <span class="sort-indicator">↕</span></th><th onclick="sortBy('running')">Đang chạy <span class="sort-indicator">↕</span></th><th onclick="sortBy('stopped')">Ngưng <span class="sort-indicator">↕</span></th><th onclick="sortBy('domains')">Domain <span class="sort-indicator">↕</span></th><th onclick="sortBy('last_date')">Cập nhật cuối <span class="sort-indicator">↕</span></th><th>Google Ads</th>${c}<th></th></tr>`}}
+function setCampFilter(f){
+  campFilter=f;
+  document.querySelectorAll('.camp-chip').forEach(c=>c.classList.remove('active'));
+  document.getElementById({all:'campAll','Đang chạy':'campRunning','Tạm ngưng':'campPaused','Bỏ':'campStopped'}[f]).classList.add('active');
+  filterData();
+}
+
+// Render header
+function renderHeader(v){
+  const h=document.getElementById('tableHead');
+  if(v==='detail'){
+    const c=hasComparison?'<th>Thay đổi</th>':'';
+    h.innerHTML=`<tr><th>#</th><th onclick="sortBy('partner')">Nhà QC <span class="sort-indicator">↕</span></th><th onclick="sortBy('domain')">Domain <span class="sort-indicator">↕</span></th><th>URL chuẩn hóa</th><th>URL gốc</th><th onclick="sortBy('status')">Trạng thái <span class="sort-indicator">↕</span></th><th onclick="sortBy('last_date')">Ngày cập nhật <span class="sort-indicator">↕</span></th><th>Google Ads</th><th onclick="sortBy('duyet')" style="cursor:pointer">Duyệt <span class="sort-indicator">↕</span></th><th onclick="sortBy('traffic')" style="cursor:pointer">Traffic <span class="sort-indicator">↕</span></th><th>Ghi chú</th><th onclick="sortBy('ads_policy')" style="cursor:pointer">Chính sách Ads <span class="sort-indicator">↕</span></th><th onclick="sortBy('traffic_type')" style="cursor:pointer">Traffic Type <span class="sort-indicator">↕</span></th><th>Cookies</th><th onclick="sortBy('hoa_hong')" style="cursor:pointer">% Hoa hồng <span class="sort-indicator">↕</span></th>${c}</tr>`;
+  }else if(v==='summary'){
+    const c=hasComparison?`<th onclick="sortBy('new_count')">Mới</th>`:'';
+    h.innerHTML=`<tr><th>#</th><th onclick="sortBy('partner')">Nhà QC <span class="sort-indicator">↕</span></th><th onclick="sortBy('total')">Tổng <span class="sort-indicator">↕</span></th><th onclick="sortBy('running')">Đang chạy <span class="sort-indicator">↕</span></th><th onclick="sortBy('stopped')">Ngưng <span class="sort-indicator">↕</span></th><th onclick="sortBy('domains')">Domain <span class="sort-indicator">↕</span></th><th onclick="sortBy('last_date')">Cập nhật cuối <span class="sort-indicator">↕</span></th><th>Google Ads</th>${c}<th></th></tr>`;
+  }else if(v==='affiliate'){
+    h.innerHTML=`<tr><th style="width:32px"></th><th>#</th><th>Domain</th><th>Partner</th><th>Accounts</th><th>Traffic</th><th>Ghi chú</th><th>Chính sách Ads</th><th>Cookies</th></tr>`;
+  }else if(v==='camp'){
+    h.innerHTML=`<tr><th>#</th><th>Domain</th><th>Account</th><th>Loại TK Google</th><th>Status Camp</th><th>Affiliate Link</th><th>Landing Page</th><th>Note</th><th>Thông tin thanh toán</th></tr>`;
+  }
+}
+
+// Escape helpers
 function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function truncateUrl(u,m){return u.length<=m?u:u.substring(0,m)+'...'}
 function copyUrl(url,btn){navigator.clipboard.writeText(url).then(()=>{btn.classList.add('copied');setTimeout(()=>btn.classList.remove('copied'),1500)})}
+
+// ── Partner detail modal (existing) ──
 function closeModal(){document.getElementById('partnerModal').classList.remove('active');document.body.style.overflow=''}
 function openPartnerDetail(partner){
-const recs=rawData.filter(r=>r.partner===partner);
-const hist=partnerHistory[partner]||[];
-const adUrl=adsLinks[partner]||'';
-const running=recs.filter(r=>r.status==='Đang chạy').length;
-const stopped=recs.filter(r=>r.status!=='Đang chạy').length;
-const s=new Set(recs.map(r=>r.domain)).size;
-let html='';
-html+=`<div class="modal-stats"><div class="modal-stat"><div class="num">${recs.length}</div><div class="lbl">Dự án</div></div><div class="modal-stat"><div class="num">${running}</div><div class="lbl">Đang chạy</div></div><div class="modal-stat"><div class="num">${stopped}</div><div class="lbl">Ngưng</div></div><div class="modal-stat"><div class="num">${s}</div><div class="lbl">Domain</div></div></div>`;
-if(adUrl)html+=`<div style="margin-bottom:20px"><a href="${escapeHtml(adUrl)}" target="_blank" class="modal-ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads Transparency</a></div>`;
-html+=`<div class="modal-section"><h3>Danh sách dự án &amp; lịch sử từng dự án</h3><table class="modal-table"><thead><tr><th>Domain</th><th>URL</th><th>Trạng thái</th><th></th></tr></thead><tbody>`;
-recs.forEach((r,idx)=>{const b=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
-const projHist=hist.filter(ev=>ev.domain===r.domain);
-html+=`<tr id="proj-${idx}" style="cursor:pointer" onclick="toggleProjHistory(${idx})"><td style="font-weight:600;color:#0f3460">${escapeHtml(r.domain)}${projHist.length>1?' <span style="font-size:10px;color:#1a73e8">('+projHist.length+' events)</span>':''}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank" onclick="event.stopPropagation()">${escapeHtml(r.url_normalized)}</a></td><td>${b}</td><td><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized)}',this);event.stopPropagation()" title="Copy URL"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></td></tr>`;
-if(projHist.length>=1){
-const sorted=[...projHist].reverse();
-html+=`<tr id="projhist-${idx}" style="display:none;background:#f7f9fc"><td colspan="4" style="padding:8px 12px 8px 32px">`;
-html+=`<div class="proj-timeline">`;
-sorted.forEach(ev=>{
-let ic='',cls='';
-if(ev.action==='added'){ic='+';cls='ev-add'}
-else if(ev.action==='removed'){ic='×';cls='ev-remove'}
-else if(ev.action==='status_change'){ic='→';cls='ev-change'}
-html+=`<div class="proj-ev ${cls}"><span class="proj-ev-date">${escapeHtml(ev.date)}</span><span class="proj-ev-icon">${ic}</span><span class="proj-ev-text">${ev.action==='added'?'Thêm mới':ev.action==='removed'?'Đã xóa':escapeHtml(ev.old_status||'')+' → '+escapeHtml(ev.status||'')}</span></div>`});
-html+=`</div></td></tr>`}});
-html+=`</tbody></table></div>`;
-if(hist.length>1){
-const sortedAll=[...hist].reverse();
-html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3>`;
-sortedAll.forEach(ev=>{
-let badge='',txt='';
-if(ev.action==='added'){badge='<span class="badge new">Thêm</span>';txt=`Thêm dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}
-else if(ev.action==='removed'){badge='<span class="badge removed">Xóa</span>';txt=`Xóa dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}
-else if(ev.action==='status_change'){badge='<span class="badge changed">Đổi</span>';txt=`<span class="timeline-domain">${escapeHtml(ev.domain)}</span>: ${escapeHtml(ev.old_status||'')} → ${escapeHtml(ev.status||'')}`}
-html+=`<div class="timeline-item"><div class="timeline-date">${escapeHtml(ev.date)}</div><div class="timeline-action">${badge}${txt}</div></div>`});
-html+=`</div>`}
-else{html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3><p style="color:#999;font-size:13px">Chưa có lịch sử thay đổi. Cập nhật data vài lần để thấy lịch sử.</p></div>`}
-document.getElementById('modalTitle').textContent=partner;
-document.getElementById('modalBody').innerHTML=html;
-document.getElementById('partnerModal').classList.add('active');
-document.body.style.overflow='hidden'}
+  const recs=rawData.filter(r=>r.partner===partner);
+  const hist=partnerHistory[partner]||[];
+  const adUrl=adsLinks[partner]||'';
+  const running=recs.filter(r=>r.status==='Đang chạy').length;
+  const stopped=recs.filter(r=>r.status!=='Đang chạy').length;
+  const s=new Set(recs.map(r=>r.domain)).size;
+  let html='';
+  html+=`<div class="modal-stats"><div class="modal-stat"><div class="num">${recs.length}</div><div class="lbl">Dự án</div></div><div class="modal-stat"><div class="num">${running}</div><div class="lbl">Đang chạy</div></div><div class="modal-stat"><div class="num">${stopped}</div><div class="lbl">Ngưng</div></div><div class="modal-stat"><div class="num">${s}</div><div class="lbl">Domain</div></div></div>`;
+  if(adUrl)html+=`<div style="margin-bottom:20px"><a href="${escapeHtml(adUrl)}" target="_blank" class="modal-ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads Transparency</a></div>`;
+  html+=`<div class="modal-section"><h3>Danh sách dự án &amp; lịch sử từng dự án</h3><table class="modal-table"><thead><tr><th>Domain</th><th>URL</th><th>Trạng thái</th><th></th></tr></thead><tbody>`;
+  recs.forEach((r,idx)=>{const b=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
+  const projHist=hist.filter(ev=>ev.domain===r.domain);
+  html+=`<tr id="proj-${idx}" style="cursor:pointer" onclick="toggleProjHistory(${idx})"><td style="font-weight:600;color:#0f3460">${escapeHtml(r.domain)}${projHist.length>1?' <span style="font-size:10px;color:#1a73e8">('+projHist.length+' events)</span>':''}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank" onclick="event.stopPropagation()">${escapeHtml(r.url_normalized)}</a></td><td>${b}</td><td><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized)}',this);event.stopPropagation()" title="Copy URL"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></td></tr>`;
+  if(projHist.length>=1){const sorted=[...projHist].reverse();html+=`<tr id="projhist-${idx}" style="display:none;background:#f7f9fc"><td colspan="4" style="padding:8px 12px 8px 32px"><div class="proj-timeline">`;sorted.forEach(ev=>{let ic='',cls='';if(ev.action==='added'){ic='+';cls='ev-add'}else if(ev.action==='removed'){ic='×';cls='ev-remove'}else if(ev.action==='status_change'){ic='→';cls='ev-change'}html+=`<div class="proj-ev ${cls}"><span class="proj-ev-date">${escapeHtml(ev.date)}</span><span class="proj-ev-icon">${ic}</span><span class="proj-ev-text">${ev.action==='added'?'Thêm mới':ev.action==='removed'?'Đã xóa':escapeHtml(ev.old_status||'')+' → '+escapeHtml(ev.status||'')}</span></div>`});html+=`</div></td></tr>`}});
+  html+=`</tbody></table></div>`;
+  if(hist.length>1){const sortedAll=[...hist].reverse();html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3>`;sortedAll.forEach(ev=>{let badge='',txt='';if(ev.action==='added'){badge='<span class="badge new">Thêm</span>';txt=`Thêm dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}else if(ev.action==='removed'){badge='<span class="badge removed">Xóa</span>';txt=`Xóa dự án <span class="timeline-domain">${escapeHtml(ev.domain)}</span>`}else if(ev.action==='status_change'){badge='<span class="badge changed">Đổi</span>';txt=`<span class="timeline-domain">${escapeHtml(ev.domain)}</span>: ${escapeHtml(ev.old_status||'')} → ${escapeHtml(ev.status||'')}`}html+=`<div class="timeline-item"><div class="timeline-date">${escapeHtml(ev.date)}</div><div class="timeline-action">${badge}${txt}</div></div>`});html+=`</div>`}else{html+=`<div class="modal-section"><h3>Tổng quan lịch sử thay đổi</h3><p style="color:#999;font-size:13px">Chưa có lịch sử thay đổi. Cập nhật data vài lần để thấy lịch sử.</p></div>`}
+  document.getElementById('modalTitle').textContent=partner;
+  document.getElementById('modalBody').innerHTML=html;
+  document.getElementById('partnerModal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
 function toggleProjHistory(idx){const row=document.getElementById('projhist-'+idx);if(row.style.display==='none'){row.style.display='table-row'}else{row.style.display='none'}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
+
+// ── Edit modal (Duyệt / Traffic / Ghi chú) ──
+function openEditModal(partner,domain,e){
+  e&&e.stopPropagation();
+  const r=rawData.find(x=>x.partner===partner&&x.domain===domain);
+  if(!r)return;
+  editingRow={partner,domain};
+  document.getElementById('editModalTitle').textContent=domain;
+  document.getElementById('editDuyet').checked=r.duyet||false;
+  document.getElementById('editTraffic').value=r.traffic||'';
+  document.getElementById('editGhiChu').value=r.ghi_chu||'';
+  document.getElementById('editAdsPolicy').value=r.ads_policy||'';
+  document.getElementById('editTrafficType').value=r.traffic_type||'';
+  document.getElementById('editTrafficDuration').value=r.traffic_duration||'';
+  document.getElementById('editDurationField').style.display=r.traffic_type==='Recurring'?'block':'none';
+  document.getElementById('editCookies').value=r.cookies||'';
+  document.getElementById('editHoaHong').value=r.hoa_hong||'';
+  document.getElementById('editModal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeEditModal(){document.getElementById('editModal').classList.remove('active');document.body.style.overflow='';editingRow=null;}
+async function saveEdit(){
+  if(!editingRow)return;
+  const btn=document.getElementById('editSaveBtn');
+  btn.textContent='Đang lưu...';btn.disabled=true;
+  const updates={duyet:document.getElementById('editDuyet').checked,traffic:document.getElementById('editTraffic').value.trim(),ghi_chu:document.getElementById('editGhiChu').value.trim(),ads_policy:document.getElementById('editAdsPolicy').value,traffic_type:document.getElementById('editTrafficType').value,traffic_duration:document.getElementById('editTrafficDuration').value.trim(),cookies:document.getElementById('editCookies').value.trim(),hoa_hong:document.getElementById('editHoaHong').value.trim()};
+  const{error}=await _sb.from('projects').update(updates).eq('partner',editingRow.partner).eq('domain',editingRow.domain);
+  btn.textContent='Lưu';btn.disabled=false;
+  if(error){alert('Lỗi lưu: '+error.message);return;}
+  const idx=rawData.findIndex(x=>x.partner===editingRow.partner&&x.domain===editingRow.domain);
+  if(idx>=0)Object.assign(rawData[idx],updates);
+  closeEditModal();
+  filterData();
+}
+
+// ── Affiliate tab ──
+function renderAffiliate(){
+  renderHeader('affiliate');
+  const body=document.getElementById('tableBody');
+  const list=rawData.filter(r=>r.duyet);
+  if(!list.length){body.innerHTML='<tr><td colspan="9" class="no-results">Chưa có dự án nào được duyệt.<br>Vào tab <strong>Chi tiết dự án</strong> → click vào hàng → tick Duyệt.</td></tr>';return;}
+  let html='',affStt=0;
+  list.forEach(r=>{
+    affStt++;
+    const key=r.partner+'|'+r.domain;
+    const accs=affiliateAccounts.filter(a=>a.partner===r.partner&&a.domain===r.domain);
+    const isExp=expandedDomains.has(key);
+    const pe=r.partner.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const de=r.domain.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    html+=`<tr class="aff-domain-row" onclick="toggleDomain('${pe}','${de}')">
+      <td style="text-align:center;color:#0f3460;font-size:14px">${isExp?'▼':'▶'}</td>
+      <td style="text-align:center;color:#999;font-size:12px">${affStt}</td>
+      <td><strong style="color:#0f3460">${escapeHtml(r.domain)}</strong></td>
+      <td style="color:#888;font-size:12px">${escapeHtml(r.partner)}</td>
+      <td style="font-size:12px">${accs.length?'<span style="color:#0f3460;font-weight:600">'+accs.length+' accounts</span>':'<span style="color:#ccc">—</span>'}</td>
+      <td onclick="event.stopPropagation()"><textarea class="aff-sub-textarea" style="width:160px;min-height:38px" onblur="updateProjectField('${pe}','${de}','traffic',this.value)" placeholder="Traffic...">${escapeHtml(r.traffic||'')}</textarea></td>
+      <td onclick="event.stopPropagation()"><textarea class="aff-sub-textarea" style="width:160px;min-height:38px" onblur="updateProjectField('${pe}','${de}','ghi_chu',this.value)" placeholder="Ghi chú...">${escapeHtml(r.ghi_chu||'')}</textarea></td>
+      <td onclick="event.stopPropagation()"><select class="aff-sub-select" onchange="updateProjectField('${pe}','${de}','ads_policy',this.value)"><option value=""${!r.ads_policy?' selected':''}>—</option><option value="Cho chạy Ads"${r.ads_policy==='Cho chạy Ads'?' selected':''}>Cho chạy Ads</option><option value="Cấm Brand"${r.ads_policy==='Cấm Brand'?' selected':''}>Cấm Brand</option><option value="Cấm SEM"${r.ads_policy==='Cấm SEM'?' selected':''}>Cấm SEM</option><option value="Cấm hoàn toàn"${r.ads_policy==='Cấm hoàn toàn'?' selected':''}>Cấm hoàn toàn</option></select></td>
+      <td onclick="event.stopPropagation()"><input class="aff-sub-input" style="width:160px" value="${escapeHtml(r.cookies||'')}" placeholder="Cookies..." onblur="updateProjectField('${pe}','${de}','cookies',this.value)"></td>
+    </tr>`;
+    if(isExp){
+      if(accs.length){
+        html+=`<tr><td colspan="9" style="padding:0 0 0 28px;background:#fafbfc">
+<table style="width:100%;border-collapse:collapse;font-size:12px">
+<thead><tr style="background:#eef2f7">
+<th style="padding:6px 8px;font-weight:600;color:#16213e">#</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Status đăng ký</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Dashboard</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Affiliate Link</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Account</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Landing Page</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Loại TK Google</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Status Camp</th>
+<th style="padding:6px 8px;font-weight:600;color:#16213e">Note</th>
+<th></th>
+</tr></thead><tbody>`;
+        accs.forEach((a,ai)=>{
+          html+=`<tr style="border-bottom:1px solid #f0f0f0">
+<td style="padding:5px 8px;color:#999">${ai+1}</td>
+<td style="padding:4px 8px"><select class="aff-sub-select" onchange="updateAffField(${a.id},'status',this.value)">
+${['Đã xin','Duyệt','Từ chối'].map(s=>`<option${a.status===s?' selected':''}>${s}</option>`).join('')}
+</select></td>
+<td style="padding:4px 8px"><textarea class="aff-sub-textarea" onblur="updateAffField(${a.id},'dashboard_url',this.value)" placeholder="URL dashboard...">${escapeHtml(a.dashboard_url||'')}</textarea></td>
+<td style="padding:4px 8px"><textarea class="aff-sub-textarea" onblur="updateAffField(${a.id},'affiliate_link',this.value)" placeholder="Affiliate link...">${escapeHtml(a.affiliate_link||'')}</textarea></td>
+<td style="padding:4px 8px"><input class="aff-sub-input" value="${escapeHtml(a.account||'')}" onblur="updateAffField(${a.id},'account',this.value)" placeholder="email@..."></td>
+<td style="padding:4px 8px"><textarea class="aff-sub-textarea" onblur="updateAffField(${a.id},'landing_page',this.value)" placeholder="Landing page...">${escapeHtml(a.landing_page||'')}</textarea></td>
+<td style="padding:4px 8px"><input class="aff-sub-input" value="${escapeHtml(a.loai_tk_google||'')}" onblur="updateAffField(${a.id},'loai_tk_google',this.value)" placeholder="Loại TK..."></td>
+<td style="padding:4px 8px"><select class="aff-sub-select" onchange="updateAffField(${a.id},'camp_status',this.value)">
+<option value=""${!a.camp_status?' selected':''}>Chưa lên camp</option>
+${['Đang chạy','Tạm ngưng','Bỏ'].map(s=>`<option${a.camp_status===s?' selected':''}>${s}</option>`).join('')}
+</select></td>
+<td style="padding:4px 8px"><textarea class="aff-sub-textarea" onblur="updateAffField(${a.id},'note',this.value)" placeholder="Ghi chú...">${escapeHtml(a.note||'')}</textarea></td>
+<td style="padding:4px 8px"><button class="btn-del-row" onclick="deleteAffRow(${a.id})">Xóa</button></td>
+</tr>`;
+        });
+        html+=`</tbody></table></td></tr>`;
+      }
+      html+=`<tr><td colspan="9" style="background:#fafbfc;padding:2px 0 8px 0"><button class="btn-add-acc" onclick="addAffAccount('${pe}','${de}')">+ Thêm account</button></td></tr>`;
+    }
+  });
+  body.innerHTML=html;
+}
+
+function toggleDomain(partner,domain){const key=partner+'|'+domain;if(expandedDomains.has(key))expandedDomains.delete(key);else expandedDomains.add(key);filterData();}
+
+async function addAffAccount(partner,domain){
+  const{data,error}=await _sb.from('affiliate_accounts').insert({partner,domain,status:'Đã xin',dashboard_url:'',affiliate_link:'',account:'',landing_page:'',loai_tk_google:'',camp_status:'',note:''}).select().single();
+  if(error){alert('Lỗi: '+error.message);return;}
+  affiliateAccounts.push(data);
+  filterData();
+}
+
+async function updateAffField(id,field,value){
+  const{error}=await _sb.from('affiliate_accounts').update({[field]:value}).eq('id',id);
+  if(error){alert('Lỗi lưu: '+error.message);return;}
+  const idx=affiliateAccounts.findIndex(a=>a.id===id);
+  if(idx>=0)affiliateAccounts[idx][field]=value;
+  if(field==='camp_status')filterData();
+}
+
+async function deleteAffRow(id){
+  if(!confirm('Xóa account này?'))return;
+  const{error}=await _sb.from('affiliate_accounts').delete().eq('id',id);
+  if(error){alert('Lỗi: '+error.message);return;}
+  affiliateAccounts=affiliateAccounts.filter(a=>a.id!==id);
+  filterData();
+}
+
+async function updateProjectField(partner,domain,field,value){
+  const{error}=await _sb.from('projects').update({[field]:value}).eq('partner',partner).eq('domain',domain);
+  if(error){alert('Lỗi lưu: '+error.message);return;}
+  const idx=rawData.findIndex(r=>r.partner===partner&&r.domain===domain);
+  if(idx>=0)rawData[idx][field]=value;
+}
+
+// ── Camp tab ──
+function renderCamp(){
+  renderHeader('camp');
+  const body=document.getElementById('tableBody');
+  let filtered=affiliateAccounts.filter(a=>a.camp_status);
+  if(campFilter!=='all')filtered=filtered.filter(a=>a.camp_status===campFilter);
+  if(!filtered.length){body.innerHTML='<tr><td colspan="9" class="no-results">Chưa có account nào lên camp.<br>Vào tab <strong>Affiliate</strong> → chọn Status Camp cho account.</td></tr>';return;}
+
+  let html='';
+  filtered.forEach((a,i)=>{
+    const cls=a.camp_status==='Đang chạy'?'running':a.camp_status==='Tạm ngưng'?'changed':'removed';
+    html+=`<tr>
+<td style="text-align:center;color:#999;font-size:12px">${i+1}</td>
+<td style="font-weight:600;color:#0f3460">${escapeHtml(a.domain)}</td>
+<td style="font-size:12px;color:#555">${escapeHtml(a.account||'—')}</td>
+<td style="font-size:12px">${escapeHtml(a.loai_tk_google||'—')}</td>
+<td><span class="badge ${cls}">${escapeHtml(a.camp_status)}</span></td>
+<td style="font-size:12px;word-break:break-all">${a.affiliate_link?`<a href="${escapeHtml(a.affiliate_link)}" target="_blank" style="color:#0f3460">${escapeHtml(a.affiliate_link)}</a>`:'—'}</td>
+<td style="font-size:12px;word-break:break-all">${a.landing_page?`<a href="${escapeHtml(a.landing_page)}" target="_blank" style="color:#0f3460">${escapeHtml(a.landing_page)}</a>`:'—'}</td>
+<td style="font-size:12px;color:#555">${escapeHtml(a.note||'—')}</td>
+<td><textarea class="aff-sub-textarea" style="width:200px;min-height:52px" onblur="updateAffField(${a.id},'payment_info',this.value)" placeholder="Thông tin thanh toán...">${escapeHtml(a.payment_info||'')}</textarea></td>
+</tr>`;
+  });
+  body.innerHTML=html;
+}
+
+// ── Main filter/render ──
 function filterData(){
-const search=document.getElementById('search').value.toLowerCase(),pv=document.getElementById('partnerFilter').value;
-renderHeader(currentView);const body=document.getElementById('tableBody');
-const colCount=hasComparison?(currentView==='detail'?9:10):(currentView==='detail'?8:9);
-if(currentView==='detail'){
-let f=rawData.filter(r=>{const ms=!search||r.partner.toLowerCase().includes(search)||r.domain.toLowerCase().includes(search)||r.url_original.toLowerCase().includes(search);const mp=!pv||r.partner===pv;const mc=changeFilter==='all'||(changeFilter==='new'&&r.change==='new')||(changeFilter==='changed'&&r.change==='changed')||(changeFilter==='same'&&(!r.change||r.change==='same'));return ms&&mp&&mc});
-if(sortCol)f.sort((a,b)=>{let va=(a[sortCol]||'').toString().toLowerCase(),vb=(b[sortCol]||'').toString().toLowerCase();return va<vb?(sortAsc?-1:1):va>vb?(sortAsc?1:-1):0});
-let lp=null,html='',stt=0;
-f.forEach(r=>{stt++;if(r.partner!==lp){const c=rawData.filter(x=>x.partner===r.partner).length;html+=`<tr class="partner-group-row"><td colspan="${colCount}">${escapeHtml(r.partner)} <span class="count" style="cursor:pointer;text-decoration:underline" onclick="openPartnerDetail('${escapeHtml(r.partner).replace(/'/g,"\\'")}')">${c} dự án →</span></td></tr>`;lp=r.partner}
-const badge=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
-let rc='',cb='';if(hasComparison){if(r.change==='new'){rc='row-new';cb='<span class="badge new">Mới</span>'}else if(r.change==='changed'){rc='row-changed';cb=`<span class="badge changed">${escapeHtml(r.old_status||'')} → ${escapeHtml(r.status)}</span>`}else cb='<span style="color:#ccc;font-size:11px">—</span>'}
-const cTd=hasComparison?`<td>${cb}</td>`:'';
-const ad=`<a href="${escapeHtml(r.ad_library_url)}" target="_blank" class="ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads</a>`;
-html+=`<tr class="${rc}"><td style="text-align:center;color:#999;font-size:12px">${stt}</td><td class="partner-cell">${escapeHtml(r.partner)}</td><td class="domain-cell">${escapeHtml(r.domain)}</td><td><span class="url-cell-wrap"><a href="${escapeHtml(r.url_normalized)}" target="_blank">${escapeHtml(r.url_normalized)}</a><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized)}',this)" title="Copy URL"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></span></td><td class="url-orig-cell" title="${escapeHtml(r.url_original)}"><a href="${escapeHtml(r.url_original.startsWith('http')?r.url_original:'https://'+r.url_original)}" target="_blank">${escapeHtml(truncateUrl(r.url_original,50))}</a></td><td>${badge}</td><td style="font-size:12px;color:#666;white-space:nowrap">${escapeHtml(r.last_date||'')}</td><td>${ad}</td>${cTd}</tr>`});
-if(hasComparison&&(changeFilter==='all'||changeFilter==='new')){const rf=removedData.filter(r=>{const ms=!search||r.partner.toLowerCase().includes(search)||r.domain.toLowerCase().includes(search);const mp=!pv||r.partner===pv;return ms&&mp});if(rf.length){html+=`<tr class="partner-group-row" style="background:#fce4ec"><td colspan="${colCount}">Đã xóa (${rf.length}) <span class="count" style="background:#e94560">${rf.length} bỏ</span></td></tr>`;rf.forEach(r=>{html+=`<tr style="opacity:.6;text-decoration:line-through"><td></td><td class="partner-cell">${escapeHtml(r.partner)}</td><td class="domain-cell">${escapeHtml(r.domain)}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank" style="text-decoration:line-through">${escapeHtml(r.url_normalized)}</a></td><td class="url-orig-cell">${escapeHtml(truncateUrl(r.url_original||r.domain,50))}</td><td><span class="badge removed">Đã xóa</span></td><td>—</td>${hasComparison?'<td><span class="badge removed">Xóa</span></td>':''}</tr>`})}}
-if(!html)html=`<tr><td colspan="${colCount}" class="no-results">Không tìm thấy kết quả</td></tr>`;
-body.innerHTML=html}else{
-let f=summaryData.filter(r=>{const ms=!search||r.partner.toLowerCase().includes(search);const mp=!pv||r.partner===pv;return ms&&mp});
-if(sortCol)f.sort((a,b)=>{let va=a[sortCol],vb=b[sortCol];if(typeof va==='string'){va=va.toLowerCase();vb=vb.toString().toLowerCase()}return va<vb?(sortAsc?-1:1):va>vb?(sortAsc?1:-1):0});else f.sort((a,b)=>b.total-a.total);
-let html='',stt2=0;f.forEach(r=>{stt2++;const recs=rawData.filter(x=>x.partner===r.partner);const stopped=recs.filter(x=>x.status!=='Đang chạy').length;const domains=new Set(recs.map(x=>x.domain)).size;const lastDate=recs.map(x=>x.last_date||'').filter(Boolean).sort().pop()||'';const adUrl=adsLinks[r.partner]||'';const cTd=hasComparison?`<td>${r.new_count?'<span class="badge new">+'+r.new_count+'</span>':'<span style="color:#ccc">—</span>'}</td>`:'';const adTd=adUrl?`<td><a href="${escapeHtml(adUrl)}" target="_blank" class="ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads</a></td>`:'<td>—</td>';r.stopped=stopped;r.domains=domains;r.last_date=lastDate;html+=`<tr><td style="text-align:center;color:#999;font-size:12px">${stt2}</td><td class="partner-cell">${escapeHtml(r.partner)}</td><td><strong>${r.total}</strong></td><td><span class="badge running">${r.running}</span></td><td>${stopped?'<span class="badge stopped">'+stopped+'</span>':'<span style="color:#ccc">—</span>'}</td><td style="color:#888">${domains}</td><td style="font-size:12px;color:#666;white-space:nowrap">${escapeHtml(lastDate)}</td>${adTd}${cTd}<td><button class="copy-btn" onclick="openPartnerDetail('${escapeHtml(r.partner).replace(/'/g,"\\'")}')" title="Xem chi tiết" style="width:auto;padding:4px 10px;font-size:12px;font-weight:600">Chi tiết →</button></td></tr>`});
-if(!html)html=`<tr><td colspan="${colCount}" class="no-results">Không tìm thấy kết quả</td></tr>`;
-body.innerHTML=html}}
+  if(currentView==='affiliate'){renderAffiliate();return;}
+  if(currentView==='camp'){renderCamp();return;}
+  const search=document.getElementById('search').value.toLowerCase(),pv=document.getElementById('partnerFilter').value;
+  const df=document.getElementById('duyetFilter').value;
+  renderHeader(currentView);
+  const body=document.getElementById('tableBody');
+  const colCount=hasComparison?(currentView==='detail'?16:10):(currentView==='detail'?15:9);
+  if(currentView==='detail'){
+    let f=rawData.filter(r=>{
+      const ms=!search||r.partner.toLowerCase().includes(search)||r.domain.toLowerCase().includes(search)||(r.url_original||'').toLowerCase().includes(search);
+      const mp=!pv||r.partner===pv;
+      const mc=changeFilter==='all'||(changeFilter==='new'&&r.change==='new')||(changeFilter==='changed'&&r.change==='changed')||(changeFilter==='same'&&(!r.change||r.change==='same'));
+      const md=!df||(df==='1'&&r.duyet)||(df==='0'&&!r.duyet);
+      return ms&&mp&&mc&&md;
+    });
+    if(sortCol)f.sort((a,b)=>{let va=(a[sortCol]||'').toString().toLowerCase(),vb=(b[sortCol]||'').toString().toLowerCase();return va<vb?(sortAsc?-1:1):va>vb?(sortAsc?1:-1):0});
+    let lp=null,html='',stt=0;
+    f.forEach(r=>{
+      stt++;
+      if(r.partner!==lp){
+        const c=rawData.filter(x=>x.partner===r.partner).length;
+        const pe=r.partner.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        html+=`<tr class="partner-group-row"><td colspan="${colCount}">${escapeHtml(r.partner)} <span class="count" style="cursor:pointer;text-decoration:underline" onclick="openPartnerDetail('${pe}')">${c} dự án →</span></td></tr>`;
+        lp=r.partner;
+      }
+      const badge=r.status==='Đang chạy'?'<span class="badge running">Đang chạy</span>':'<span class="badge stopped">Ngưng chạy</span>';
+      let rc='',cb='';
+      if(hasComparison){if(r.change==='new'){rc='row-new';cb='<span class="badge new">Mới</span>'}else if(r.change==='changed'){rc='row-changed';cb=`<span class="badge changed">${escapeHtml(r.old_status||'')} → ${escapeHtml(r.status)}</span>`}else cb='<span style="color:#ccc;font-size:11px">—</span>'}
+      const cTd=hasComparison?`<td>${cb}</td>`:'';
+      const duyetBadge=r.duyet?'<span class="badge duyet">✓</span>':'<span style="color:#ddd">—</span>';
+      const pe=r.partner.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      const de=r.domain.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      const ad=`<a href="${escapeHtml(r.ad_library_url||'#')}" target="_blank" class="ad-link" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads</a>`;
+      html+=`<tr class="${rc}" style="cursor:pointer" onclick="openEditModal('${pe}','${de}',event)">
+<td style="text-align:center;color:#999;font-size:12px">${stt}</td>
+<td class="partner-cell">${escapeHtml(r.partner)}</td>
+<td class="domain-cell">${escapeHtml(r.domain)}</td>
+<td><span class="url-cell-wrap"><a href="${escapeHtml(r.url_normalized||'')}" target="_blank" onclick="event.stopPropagation()">${escapeHtml(r.url_normalized||'')}</a><button class="copy-btn" onclick="copyUrl('${escapeHtml(r.url_normalized||'')}',this);event.stopPropagation()" title="Copy"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button></span></td>
+<td class="url-orig-cell" title="${escapeHtml(r.url_original||'')}"><a href="${escapeHtml((r.url_original||'').startsWith('http')?r.url_original:'https://'+(r.url_original||''))}" target="_blank" onclick="event.stopPropagation()">${escapeHtml(truncateUrl(r.url_original||'',40))}</a></td>
+<td>${badge}</td>
+<td style="font-size:12px;color:#666;white-space:nowrap">${escapeHtml(r.last_date||'')}</td>
+<td>${ad}</td>
+<td style="text-align:center">${duyetBadge}</td>
+<td onclick="event.stopPropagation()" style="min-width:120px"><input style="width:110px;padding:3px 6px;border:1px solid #e0e0e0;border-radius:4px;font-size:12px;color:#555;background:transparent;outline:none" value="${escapeHtml(r.traffic||'')}" placeholder="Traffic..." onfocus="this.style.borderColor='#0f3460';this.style.background='#fff'" onblur="this.style.borderColor='#e0e0e0';this.style.background='transparent';updateProjectField('${pe}','${de}','traffic',this.value)"></td>
+<td style="font-size:12px;color:#555;min-width:150px">${escapeHtml(r.ghi_chu||'')}</td>
+<td>${r.ads_policy==='Cho chạy Ads'?'<span class="badge running">Cho chạy Ads</span>':r.ads_policy==='Cấm Brand'?'<span class="badge changed">Cấm Brand</span>':r.ads_policy==='Cấm SEM'?'<span class="badge removed">Cấm SEM</span>':r.ads_policy==='Cấm hoàn toàn'?'<span class="badge removed" style="background:#6b0000;color:#fff">Cấm hoàn toàn</span>':'—'}</td>
+<td onclick="event.stopPropagation()" style="min-width:160px">
+  <select class="aff-sub-select" onchange="updateProjectField('${pe}','${de}','traffic_type',this.value);document.getElementById('dur_'+${r.id||0}).style.display=this.value==='Recurring'?'block':'none'">
+    <option value=""${!r.traffic_type?' selected':''}>—</option>
+    <option value="Recurring"${r.traffic_type==='Recurring'?' selected':''}>Recurring</option>
+    <option value="One-time"${r.traffic_type==='One-time'?' selected':''}>One-time</option>
+    <option value="Lifetime"${r.traffic_type==='Lifetime'?' selected':''}>Lifetime</option>
+  </select>
+  <input id="dur_${r.id||0}" style="display:${r.traffic_type==='Recurring'?'block':'none'};width:100px;margin-top:3px;padding:2px 6px;border:1px solid #e0e0e0;border-radius:4px;font-size:11px;outline:none" value="${escapeHtml(r.traffic_duration||'')}" placeholder="Thời hạn..." onblur="updateProjectField('${pe}','${de}','traffic_duration',this.value)">
+</td>
+<td onclick="event.stopPropagation()"><input style="width:110px;padding:3px 6px;border:1px solid #e0e0e0;border-radius:4px;font-size:12px;color:#555;background:transparent;outline:none" value="${escapeHtml(r.cookies||'')}" placeholder="Cookies..." onfocus="this.style.borderColor='#0f3460';this.style.background='#fff'" onblur="this.style.borderColor='#e0e0e0';this.style.background='transparent';updateProjectField('${pe}','${de}','cookies',this.value)"></td>
+<td onclick="event.stopPropagation()"><input style="width:80px;padding:3px 6px;border:1px solid #e0e0e0;border-radius:4px;font-size:12px;color:#555;background:transparent;outline:none;text-align:center" value="${escapeHtml(r.hoa_hong||'')}" placeholder="%" onfocus="this.style.borderColor='#0f3460';this.style.background='#fff'" onblur="this.style.borderColor='#e0e0e0';this.style.background='transparent';updateProjectField('${pe}','${de}','hoa_hong',this.value)"></td>
+${cTd}
+</tr>`;
+    });
+    if(hasComparison&&(changeFilter==='all'||changeFilter==='new')){
+      const rf=removedData.filter(r=>{const ms=!search||r.partner.toLowerCase().includes(search)||r.domain.toLowerCase().includes(search);const mp=!pv||r.partner===pv;return ms&&mp});
+      if(rf.length){html+=`<tr class="partner-group-row" style="background:#fce4ec"><td colspan="${colCount}">Đã xóa (${rf.length}) <span class="count" style="background:#e94560">${rf.length} bỏ</span></td></tr>`;rf.forEach(r=>{html+=`<tr style="opacity:.6;text-decoration:line-through"><td></td><td class="partner-cell">${escapeHtml(r.partner)}</td><td class="domain-cell">${escapeHtml(r.domain)}</td><td><a href="${escapeHtml(r.url_normalized)}" target="_blank" style="text-decoration:line-through">${escapeHtml(r.url_normalized)}</a></td><td></td><td><span class="badge removed">Đã xóa</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>${hasComparison?'<td><span class="badge removed">Xóa</span></td>':''}</tr>`})}}
+    if(!html)html=`<tr><td colspan="${colCount}" class="no-results">Không tìm thấy kết quả</td></tr>`;
+    body.innerHTML=html;
+  }else{
+    let f=summaryData.filter(r=>{const ms=!search||r.partner.toLowerCase().includes(search);const mp=!pv||r.partner===pv;return ms&&mp});
+    if(sortCol)f.sort((a,b)=>{let va=a[sortCol],vb=b[sortCol];if(typeof va==='string'){va=va.toLowerCase();vb=(vb||'').toString().toLowerCase()}return va<vb?(sortAsc?-1:1):va>vb?(sortAsc?1:-1):0});else f.sort((a,b)=>b.total-a.total);
+    let html='',stt2=0;
+    f.forEach(r=>{
+      stt2++;
+      const recs=rawData.filter(x=>x.partner===r.partner);
+      const stopped=recs.filter(x=>x.status!=='Đang chạy').length;
+      const domains=new Set(recs.map(x=>x.domain)).size;
+      const lastDate=recs.map(x=>x.last_date||'').filter(Boolean).sort().pop()||'';
+      const adUrl=adsLinks[r.partner]||'';
+      const cTd=hasComparison?`<td>${r.new_count?'<span class="badge new">+'+r.new_count+'</span>':'<span style="color:#ccc">—</span>'}</td>`:'';
+      const adTd=adUrl?`<td><a href="${escapeHtml(adUrl)}" target="_blank" class="ad-link"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>Google Ads</a></td>`:'<td>—</td>';
+      r.stopped=stopped;r.domains=domains;r.last_date=lastDate;
+      const pe=r.partner.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      html+=`<tr><td style="text-align:center;color:#999;font-size:12px">${stt2}</td><td class="partner-cell">${escapeHtml(r.partner)}</td><td><strong>${r.total}</strong></td><td><span class="badge running">${r.running}</span></td><td>${stopped?'<span class="badge stopped">'+stopped+'</span>':'<span style="color:#ccc">—</span>'}</td><td style="color:#888">${domains}</td><td style="font-size:12px;color:#666;white-space:nowrap">${escapeHtml(lastDate)}</td>${adTd}${cTd}<td><button class="copy-btn" onclick="openPartnerDetail('${pe}')" title="Xem chi tiết" style="width:auto;padding:4px 10px;font-size:12px;font-weight:600">Chi tiết →</button></td></tr>`;
+    });
+    if(!html)html=`<tr><td colspan="${colCount}" class="no-results">Không tìm thấy kết quả</td></tr>`;
+    body.innerHTML=html;
+  }
+}
+
 function sortBy(col){if(sortCol===col)sortAsc=!sortAsc;else{sortCol=col;sortAsc=true}filterData()}
-const sel=document.getElementById('partnerFilter');summaryData.forEach(s=>{const o=document.createElement('option');o.value=s.partner;o.textContent=`${s.partner} (${s.total})`;sel.appendChild(o)});
-filterData();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeEditModal();}if(e.key==='Enter'&&editingRow&&!e.shiftKey){e.preventDefault();saveEdit();}});
+loadData();
 </script>
 </body>
 </html>

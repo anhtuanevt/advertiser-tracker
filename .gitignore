@@ -3,3 +3,4 @@ snapshots/
 __pycache__/
 .DS_Store
 .env
+supabase_config.py
