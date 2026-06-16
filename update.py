@@ -458,6 +458,7 @@ tr.row-changed:hover{background:#fff3cd!important}
 <select id="partnerFilter" onchange="filterData()"><option value="">Tất cả nhà QC</option></select>
 <select id="duyetFilter" onchange="filterData()"><option value="">Duyệt: Tất cả</option><option value="1">Đã duyệt</option><option value="0">Chưa duyệt</option></select>
 <button id="refreshBtn" onclick="refreshData()" style="padding:6px 14px;background:#0f3460;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">↻ Làm mới</button>
+<button id="addBtn" onclick="openAddModal()" style="padding:6px 14px;background:#28a745;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">+ Thêm dự án</button>
 <div class="change-filters" id="changeFilters" style="display:none">
 <div class="chip chip-all active" onclick="setChangeFilter('all')" id="chipAll">Tất cả</div>
 <div class="chip chip-new" onclick="setChangeFilter('new')" id="chipNew">__CHIP_NEW__</div>
@@ -506,7 +507,26 @@ tr.row-changed:hover{background:#fff3cd!important}
 <div class="edit-field"><label>% Hoa hồng</label><input type="text" id="editHoaHong" placeholder="VD: 30%, 50%..."></div>
 <div class="edit-actions">
 <button class="btn-cancel" onclick="closeEditModal()">Hủy</button>
+<button class="btn-del" onclick="deleteProject()" style="padding:8px 16px;background:#e94560;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer">Xóa</button>
 <button class="btn-save" id="editSaveBtn" onclick="saveEdit()">Lưu</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Add project modal -->
+<div class="modal-overlay" id="addModal" onclick="if(event.target===this)closeAddModal()">
+<div class="edit-modal">
+<div class="modal-header"><h2>Thêm dự án mới</h2><button class="modal-close" onclick="closeAddModal()">&times;</button></div>
+<div class="modal-body" style="padding:20px 24px">
+<div class="edit-field"><label>Nhà QC (Partner) *</label><input type="text" id="addPartner" placeholder="Tên nhà quảng cáo..."></div>
+<div class="edit-field"><label>URL *</label><input type="text" id="addUrl" placeholder="https://example.com" oninput="previewDomain()"></div>
+<div class="edit-field" id="addDomainPreview" style="display:none"><label>Domain (tự động)</label><div style="padding:9px 12px;background:#f0f2f5;border-radius:8px;font-size:13px;color:#0f3460;font-weight:600" id="addDomainText"></div></div>
+<div class="edit-field"><label>Trạng thái</label><select id="addStatus" style="width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none"><option value="Đang chạy">Đang chạy</option><option value="Ngưng chạy">Ngưng chạy</option></select></div>
+<div class="edit-field"><label>Google Ads Link (tùy chọn)</label><input type="text" id="addAdLibrary" placeholder="https://adstransparency.google.com/..."></div>
+<div class="edit-actions">
+<button class="btn-cancel" onclick="closeAddModal()">Hủy</button>
+<button class="btn-save" id="addSaveBtn" onclick="saveAddProject()">Thêm</button>
 </div>
 </div>
 </div>
@@ -680,6 +700,74 @@ async function saveEdit(){
   if(error){alert('Lỗi lưu: '+error.message);return;}
   const idx=rawData.findIndex(x=>x.partner===editingRow.partner&&x.domain===editingRow.domain);
   if(idx>=0)Object.assign(rawData[idx],updates);
+  closeEditModal();
+  filterData();
+}
+
+// ── Add new project ──
+function normalizeUrlJs(raw){
+  if(!raw||!raw.trim())return{domain:'',clean:''};
+  let url=raw.trim();
+  if(!url.startsWith('http'))url='https://'+url;
+  try{
+    const p=new URL(url);
+    let domain=p.hostname.toLowerCase();
+    if(domain.startsWith('www.'))domain=domain.slice(4);
+    return{domain,clean:'https://'+domain};
+  }catch(e){return{domain:url,clean:url}}
+}
+function previewDomain(){
+  const raw=document.getElementById('addUrl').value;
+  const{domain}=normalizeUrlJs(raw);
+  const el=document.getElementById('addDomainPreview'),txt=document.getElementById('addDomainText');
+  if(domain){el.style.display='block';txt.textContent=domain}else{el.style.display='none'}
+}
+function openAddModal(){
+  document.getElementById('addPartner').value='';
+  document.getElementById('addUrl').value='';
+  document.getElementById('addStatus').value='Đang chạy';
+  document.getElementById('addAdLibrary').value='';
+  document.getElementById('addDomainPreview').style.display='none';
+  document.getElementById('addModal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeAddModal(){document.getElementById('addModal').classList.remove('active');document.body.style.overflow='';}
+async function saveAddProject(){
+  const partner=document.getElementById('addPartner').value.trim();
+  const rawUrl=document.getElementById('addUrl').value.trim();
+  if(!partner){alert('Vui lòng nhập tên nhà QC');return;}
+  if(!rawUrl){alert('Vui lòng nhập URL');return;}
+  const{domain,clean}=normalizeUrlJs(rawUrl);
+  if(!domain){alert('URL không hợp lệ');return;}
+  const btn=document.getElementById('addSaveBtn');
+  btn.textContent='Đang thêm...';btn.disabled=true;
+  const timestamp=new Date().toLocaleDateString('en-GB').replace(/\//g,'-')+' '+new Date().toLocaleTimeString('en-GB');
+  const row={partner,domain,url_original:rawUrl,url_normalized:clean,status:document.getElementById('addStatus').value,ad_library_url:document.getElementById('addAdLibrary').value.trim(),change:'new',old_status:'',last_date:timestamp,duyet:false,traffic:'',ghi_chu:'',ads_policy:'',traffic_type:'',traffic_duration:'',cookies:'',hoa_hong:''};
+  const{data,error}=await _sb.from('projects').upsert(row,{onConflict:'partner,domain'}).select().single();
+  btn.textContent='Thêm';btn.disabled=false;
+  if(error){alert('Lỗi: '+error.message);return;}
+  rawData.push(data||row);
+  summaryData=computeSummary(rawData);
+  adsLinks=computeAdsLinks(rawData);
+  const sel=document.getElementById('partnerFilter');
+  sel.innerHTML='<option value="">Tất cả nhà QC</option>';
+  summaryData.forEach(s=>{const o=document.createElement('option');o.value=s.partner;o.textContent=`${s.partner} (${s.total})`;sel.appendChild(o)});
+  const uniqueDomains=[...new Set(rawData.map(r=>r.domain))];
+  document.getElementById('statPartners').textContent=summaryData.length;
+  document.getElementById('statProjects').textContent=rawData.length;
+  document.getElementById('statDomains').textContent=uniqueDomains.length;
+  document.getElementById('statRunning').textContent=rawData.filter(r=>r.status==='Đang chạy').length;
+  closeAddModal();
+  filterData();
+}
+async function deleteProject(){
+  if(!editingRow)return;
+  if(!confirm('Xóa dự án này khỏi hệ thống?'))return;
+  const{error}=await _sb.from('projects').delete().eq('partner',editingRow.partner).eq('domain',editingRow.domain);
+  if(error){alert('Lỗi: '+error.message);return;}
+  rawData=rawData.filter(r=>!(r.partner===editingRow.partner&&r.domain===editingRow.domain));
+  summaryData=computeSummary(rawData);
+  adsLinks=computeAdsLinks(rawData);
   closeEditModal();
   filterData();
 }
