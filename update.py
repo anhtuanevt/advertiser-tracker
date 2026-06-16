@@ -459,6 +459,7 @@ tr.row-changed:hover{background:#fff3cd!important}
 <select id="duyetFilter" onchange="filterData()"><option value="">Duyệt: Tất cả</option><option value="1">Đã duyệt</option><option value="0">Chưa duyệt</option></select>
 <button id="refreshBtn" onclick="refreshData()" style="padding:6px 14px;background:#0f3460;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">↻ Làm mới</button>
 <button id="addBtn" onclick="openAddModal()" style="padding:6px 14px;background:#28a745;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">+ Thêm dự án</button>
+<button id="addAffBtn" onclick="openAddModal(true)" style="display:none;padding:6px 14px;background:#28a745;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:500">+ Thêm dự án (đã duyệt)</button>
 <div class="change-filters" id="changeFilters" style="display:none">
 <div class="chip chip-all active" onclick="setChangeFilter('all')" id="chipAll">Tất cả</div>
 <div class="chip chip-new" onclick="setChangeFilter('new')" id="chipNew">__CHIP_NEW__</div>
@@ -523,6 +524,7 @@ tr.row-changed:hover{background:#fff3cd!important}
 <div class="edit-field"><label>URL *</label><input type="text" id="addUrl" placeholder="https://example.com" oninput="previewDomain()"></div>
 <div class="edit-field" id="addDomainPreview" style="display:none"><label>Domain (tự động)</label><div style="padding:9px 12px;background:#f0f2f5;border-radius:8px;font-size:13px;color:#0f3460;font-weight:600" id="addDomainText"></div></div>
 <div class="edit-field"><label>Trạng thái</label><select id="addStatus" style="width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;outline:none"><option value="Đang chạy">Đang chạy</option><option value="Ngưng chạy">Ngưng chạy</option></select></div>
+<div class="edit-field"><label>Duyệt Affiliate</label><div class="edit-checkbox-row"><input type="checkbox" id="addDuyet"><span>Tự động đưa vào tab Affiliate</span></div></div>
 <div class="edit-field"><label>Google Ads Link (tùy chọn)</label><input type="text" id="addAdLibrary" placeholder="https://adstransparency.google.com/..."></div>
 <div class="edit-actions">
 <button class="btn-cancel" onclick="closeAddModal()">Hủy</button>
@@ -606,6 +608,8 @@ async function switchView(v){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(tabIds[v]).classList.add('active');
   document.getElementById('campFilters').style.display=v==='camp'?'flex':'none';
+  document.getElementById('addBtn').style.display=v==='detail'?'inline-block':'none';
+  document.getElementById('addAffBtn').style.display=v==='affiliate'?'inline-block':'none';
   if(v==='camp'||v==='affiliate') await loadAffiliateAccounts();
   filterData();
 }
@@ -722,10 +726,11 @@ function previewDomain(){
   const el=document.getElementById('addDomainPreview'),txt=document.getElementById('addDomainText');
   if(domain){el.style.display='block';txt.textContent=domain}else{el.style.display='none'}
 }
-function openAddModal(){
+function openAddModal(autoDuyet){
   document.getElementById('addPartner').value='';
   document.getElementById('addUrl').value='';
   document.getElementById('addStatus').value='Đang chạy';
+  document.getElementById('addDuyet').checked=!!autoDuyet;
   document.getElementById('addAdLibrary').value='';
   document.getElementById('addDomainPreview').style.display='none';
   document.getElementById('addModal').classList.add('active');
@@ -742,7 +747,7 @@ async function saveAddProject(){
   const btn=document.getElementById('addSaveBtn');
   btn.textContent='Đang thêm...';btn.disabled=true;
   const timestamp=new Date().toLocaleDateString('en-GB').replace(/\//g,'-')+' '+new Date().toLocaleTimeString('en-GB');
-  const row={partner,domain,url_original:rawUrl,url_normalized:clean,status:document.getElementById('addStatus').value,ad_library_url:document.getElementById('addAdLibrary').value.trim(),change:'new',old_status:'',last_date:timestamp,duyet:false,traffic:'',ghi_chu:'',ads_policy:'',traffic_type:'',traffic_duration:'',cookies:'',hoa_hong:''};
+  const row={partner,domain,url_original:rawUrl,url_normalized:clean,status:document.getElementById('addStatus').value,ad_library_url:document.getElementById('addAdLibrary').value.trim(),change:'new',old_status:'',last_date:timestamp,duyet:document.getElementById('addDuyet').checked,traffic:'',ghi_chu:'',ads_policy:'',traffic_type:'',traffic_duration:'',cookies:'',hoa_hong:''};
   const{data,error}=await _sb.from('projects').upsert(row,{onConflict:'partner,domain'}).select().single();
   btn.textContent='Thêm';btn.disabled=false;
   if(error){alert('Lỗi: '+error.message);return;}
